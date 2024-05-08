@@ -14,6 +14,12 @@ import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -31,29 +37,41 @@ public class home extends javax.swing.JFrame {
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
         Calendar cal = Calendar.getInstance();
         tfCheckINDateCCI.setText(myFormat.format(cal.getTime()));
+        
+        tfSearchCheckOUTDateCDB.setText(myFormat.format(cal.getTime()));
+
+        tfCustomerNameCCO.setEditable(false);
+        tfCheckINDateCCO.setEditable(false);
+        tfCheckOUTDateCCO.setEditable(false);
+        tfCustomerMNCCO.setEditable(false);
+        tfPricePerDayCCO.setEditable(false);
+        tfNumDaysStayCCO.setEditable(false);
+        tfTotalAmountCCO.setEditable(false);
+        tfEmailCCO.setEditable(false);
     }
-    
+
     String bed;
     String roomType;
     String roomNo;
     String price;
-    
-    public void roomDetails()
-    {
+
+    int id = 0;
+    String Query;
+//    String roomTypeCCO;
+//    String bedCCO;
+//    String roomNoCCO;
+
+    public void roomDetails() {
         cbRoomNumCCI.removeAllItems();
         tfPriceCCI.setText("");
-        bed = (String)cbBedCCI.getSelectedItem();
-        roomType = (String)cbRoomTypeCCI.getSelectedItem();
-        try
-        {
-            ResultSet rs = Select.getData("select * from room where bed = '"+bed+"' and roomType = '"+roomType+"' and status = 'Not Booked'");
-            while(rs.next())
-            {
+        bed = (String) cbBedCCI.getSelectedItem();
+        roomType = (String) cbRoomTypeCCI.getSelectedItem();
+        try {
+            ResultSet rs = Select.getData("select * from room where bed = '" + bed + "' and roomType = '" + roomType + "' and status = 'Not Booked'");
+            while (rs.next()) {
                 cbRoomNumCCI.addItem(rs.getString(1));
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
@@ -180,6 +198,41 @@ public class home extends javax.swing.JFrame {
         tfPriceCCI = new javax.swing.JTextField();
         kbtnAlloteRoomCCI = new com.k33ptoo.components.KButton();
         kbtnClearCCI = new com.k33ptoo.components.KButton();
+        cardCustomerCheckOut = new javax.swing.JPanel();
+        kGPBackground3 = new com.k33ptoo.components.KGradientPanel();
+        lbCCOLogo = new javax.swing.JLabel();
+        lbRoomNumCCO = new javax.swing.JLabel();
+        tfRoomNumCCO = new javax.swing.JTextField();
+        kbtnSearchCCO = new com.k33ptoo.components.KButton();
+        lbCustomerNameCCO = new javax.swing.JLabel();
+        tfCustomerNameCCO = new javax.swing.JTextField();
+        lbPricePerDayCCO = new javax.swing.JLabel();
+        tfPricePerDayCCO = new javax.swing.JTextField();
+        lbCheckINDateCCO = new javax.swing.JLabel();
+        tfCheckINDateCCO = new javax.swing.JTextField();
+        lbNumDaysStayCCO = new javax.swing.JLabel();
+        tfNumDaysStayCCO = new javax.swing.JTextField();
+        lbCheckOUTDateCCO = new javax.swing.JLabel();
+        tfCheckOUTDateCCO = new javax.swing.JTextField();
+        lbTotalAmountCCO = new javax.swing.JLabel();
+        tfTotalAmountCCO = new javax.swing.JTextField();
+        lbCustomerMNCCO = new javax.swing.JLabel();
+        tfCustomerMNCCO = new javax.swing.JTextField();
+        lbEmailCCO = new javax.swing.JLabel();
+        tfEmailCCO = new javax.swing.JTextField();
+        kbtnCheckOutCCO = new com.k33ptoo.components.KButton();
+        kbtnClearCCO = new com.k33ptoo.components.KButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtbCustomerCheckOut = new javax.swing.JTable();
+        cardCustomerDetailsBill = new javax.swing.JPanel();
+        kGPBackground4 = new com.k33ptoo.components.KGradientPanel();
+        lbCDBLogo = new javax.swing.JLabel();
+        lbSearchCheckOUTDateCDB = new javax.swing.JLabel();
+        tfSearchCheckOUTDateCDB = new javax.swing.JTextField();
+        kbtnSearchCDB = new com.k33ptoo.components.KButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jtbCustomerDetailsBill = new javax.swing.JTable();
+        lbClickCDB = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -262,17 +315,32 @@ public class home extends javax.swing.JFrame {
         lbCustomerCheckOut.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
         lbCustomerCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer Check Out.png"))); // NOI18N
         lbCustomerCheckOut.setText("Customer Check Out");
+        lbCustomerCheckOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCustomerCheckOutMouseClicked(evt);
+            }
+        });
         jpnSlideMenu.add(lbCustomerCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
 
         lbCustomerDetailsBill.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
         lbCustomerDetailsBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer Details Bill.png"))); // NOI18N
         lbCustomerDetailsBill.setText("Customer Details Bill");
+        lbCustomerDetailsBill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCustomerDetailsBillMouseClicked(evt);
+            }
+        });
         jpnSlideMenu.add(lbCustomerDetailsBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, -1, -1));
         jpnSlideMenu.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 250, 10));
 
         lbLogout.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
         lbLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
         lbLogout.setText("Logout");
+        lbLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbLogoutMouseClicked(evt);
+            }
+        });
         jpnSlideMenu.add(lbLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, -1, -1));
 
         lbHomePage.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
@@ -537,17 +605,32 @@ public class home extends javax.swing.JFrame {
 
         cbBedCCI.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cbBedCCI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Double", "Triple" }));
+        cbBedCCI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbBedCCIActionPerformed(evt);
+            }
+        });
 
         lbRoomTypeCCI.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbRoomTypeCCI.setText("Room Type:");
 
         cbRoomTypeCCI.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cbRoomTypeCCI.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "None-AC" }));
+        cbRoomTypeCCI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRoomTypeCCIActionPerformed(evt);
+            }
+        });
 
         lbRoomNumCCI.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbRoomNumCCI.setText("Room Number:");
 
         cbRoomNumCCI.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        cbRoomNumCCI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRoomNumCCIActionPerformed(evt);
+            }
+        });
 
         lbPriceCCI.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbPriceCCI.setText("Price:");
@@ -559,12 +642,22 @@ public class home extends javax.swing.JFrame {
         kbtnAlloteRoomCCI.setkHoverEndColor(new java.awt.Color(0, 204, 204));
         kbtnAlloteRoomCCI.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         kbtnAlloteRoomCCI.setkHoverStartColor(new java.awt.Color(153, 255, 0));
+        kbtnAlloteRoomCCI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kbtnAlloteRoomCCIActionPerformed(evt);
+            }
+        });
 
         kbtnClearCCI.setText("Clear");
         kbtnClearCCI.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         kbtnClearCCI.setkHoverEndColor(new java.awt.Color(0, 204, 204));
         kbtnClearCCI.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         kbtnClearCCI.setkHoverStartColor(new java.awt.Color(153, 255, 0));
+        kbtnClearCCI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kbtnClearCCIActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGPBackground2Layout = new javax.swing.GroupLayout(kGPBackground2);
         kGPBackground2.setLayout(kGPBackground2Layout);
@@ -619,10 +712,11 @@ public class home extends javax.swing.JFrame {
                     .addComponent(lbIDProofCCI)
                     .addComponent(lbBedCCI))
                 .addGap(18, 18, 18)
-                .addGroup(kGPBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNameCCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(kGPBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfIDProofCCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbBedCCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(kGPBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfNameCCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbBedCCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(kGPBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbMobileNumCCI)
@@ -680,6 +774,339 @@ public class home extends javax.swing.JFrame {
 
         jpnMain.add(cardCustomerCheckIn, "card4");
 
+        cardCustomerCheckOut.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                cardCustomerCheckOutComponentShown(evt);
+            }
+        });
+
+        kGPBackground3.setkBorderRadius(0);
+        kGPBackground3.setkEndColor(new java.awt.Color(102, 255, 153));
+        kGPBackground3.setkGradientFocus(900);
+        kGPBackground3.setkStartColor(new java.awt.Color(51, 153, 255));
+        kGPBackground3.setPreferredSize(new java.awt.Dimension(1370, 710));
+
+        lbCCOLogo.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
+        lbCCOLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer Check Out.png"))); // NOI18N
+        lbCCOLogo.setText("Customer Check Out");
+
+        lbRoomNumCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbRoomNumCCO.setText("Room Number:");
+
+        tfRoomNumCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        kbtnSearchCCO.setText("Search");
+        kbtnSearchCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnSearchCCO.setkHoverEndColor(new java.awt.Color(0, 204, 204));
+        kbtnSearchCCO.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kbtnSearchCCO.setkHoverStartColor(new java.awt.Color(153, 255, 0));
+        kbtnSearchCCO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kbtnSearchCCOActionPerformed(evt);
+            }
+        });
+
+        lbCustomerNameCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbCustomerNameCCO.setText("Customer Name:");
+
+        tfCustomerNameCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbPricePerDayCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbPricePerDayCCO.setText("Price Per Day:");
+
+        tfPricePerDayCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbCheckINDateCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbCheckINDateCCO.setText("Check IN Date:");
+
+        tfCheckINDateCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbNumDaysStayCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbNumDaysStayCCO.setText("Number Of Days Stay:");
+
+        tfNumDaysStayCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbCheckOUTDateCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbCheckOUTDateCCO.setText("Check OUT Date (Today):");
+
+        tfCheckOUTDateCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbTotalAmountCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbTotalAmountCCO.setText("Total Amount to Collect From Customer:");
+
+        tfTotalAmountCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbCustomerMNCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbCustomerMNCCO.setText("Customer Mobile Number:");
+
+        tfCustomerMNCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        lbEmailCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbEmailCCO.setText("Email:");
+
+        tfEmailCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        kbtnCheckOutCCO.setText("Check Out");
+        kbtnCheckOutCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnCheckOutCCO.setkHoverEndColor(new java.awt.Color(0, 204, 204));
+        kbtnCheckOutCCO.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kbtnCheckOutCCO.setkHoverStartColor(new java.awt.Color(153, 255, 0));
+        kbtnCheckOutCCO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kbtnCheckOutCCOActionPerformed(evt);
+            }
+        });
+
+        kbtnClearCCO.setText("Clear");
+        kbtnClearCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnClearCCO.setkHoverEndColor(new java.awt.Color(0, 204, 204));
+        kbtnClearCCO.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kbtnClearCCO.setkHoverStartColor(new java.awt.Color(153, 255, 0));
+        kbtnClearCCO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kbtnClearCCOActionPerformed(evt);
+            }
+        });
+
+        jtbCustomerCheckOut.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Mobile Number", "Nationality", "Gender", "Email", "ID Proof", "Address", "CheckIn Date", "Room Number", "Bed", "Room Type", "Price Per Day"
+            }
+        ));
+        jScrollPane2.setViewportView(jtbCustomerCheckOut);
+
+        javax.swing.GroupLayout kGPBackground3Layout = new javax.swing.GroupLayout(kGPBackground3);
+        kGPBackground3.setLayout(kGPBackground3Layout);
+        kGPBackground3Layout.setHorizontalGroup(
+            kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGPBackground3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(kGPBackground3Layout.createSequentialGroup()
+                        .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(kGPBackground3Layout.createSequentialGroup()
+                                .addGap(410, 410, 410)
+                                .addComponent(lbRoomNumCCO)
+                                .addGap(82, 82, 82)
+                                .addComponent(tfRoomNumCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(kbtnSearchCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(kGPBackground3Layout.createSequentialGroup()
+                                .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(kGPBackground3Layout.createSequentialGroup()
+                                        .addComponent(kbtnCheckOutCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(kbtnClearCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lbCCOLogo)
+                                    .addComponent(lbCustomerNameCCO)
+                                    .addComponent(tfCustomerNameCCO)
+                                    .addComponent(lbPricePerDayCCO)
+                                    .addComponent(tfPricePerDayCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfCheckINDateCCO)
+                                    .addComponent(tfNumDaysStayCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbCheckINDateCCO)
+                                    .addComponent(lbNumDaysStayCCO))
+                                .addGap(94, 94, 94)
+                                .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbCheckOUTDateCCO)
+                                    .addComponent(lbTotalAmountCCO)
+                                    .addComponent(tfCheckOUTDateCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfTotalAmountCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(98, 98, 98)))
+                        .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfEmailCCO, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(lbCustomerMNCCO)
+                            .addComponent(lbEmailCCO)
+                            .addComponent(tfCustomerMNCCO, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        kGPBackground3Layout.setVerticalGroup(
+            kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGPBackground3Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(lbCCOLogo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbRoomNumCCO)
+                    .addComponent(tfRoomNumCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kbtnSearchCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCustomerNameCCO)
+                    .addComponent(lbCheckINDateCCO)
+                    .addComponent(lbCheckOUTDateCCO)
+                    .addComponent(lbCustomerMNCCO))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfCustomerNameCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCheckINDateCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCheckOUTDateCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCustomerMNCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPricePerDayCCO)
+                    .addComponent(lbNumDaysStayCCO)
+                    .addComponent(lbTotalAmountCCO)
+                    .addComponent(lbEmailCCO))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfPricePerDayCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNumDaysStayCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfTotalAmountCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfEmailCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(kbtnCheckOutCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kbtnClearCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout cardCustomerCheckOutLayout = new javax.swing.GroupLayout(cardCustomerCheckOut);
+        cardCustomerCheckOut.setLayout(cardCustomerCheckOutLayout);
+        cardCustomerCheckOutLayout.setHorizontalGroup(
+            cardCustomerCheckOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1370, Short.MAX_VALUE)
+            .addGroup(cardCustomerCheckOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(cardCustomerCheckOutLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(kGPBackground3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        cardCustomerCheckOutLayout.setVerticalGroup(
+            cardCustomerCheckOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 710, Short.MAX_VALUE)
+            .addGroup(cardCustomerCheckOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(cardCustomerCheckOutLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(kGPBackground3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jpnMain.add(cardCustomerCheckOut, "card5");
+
+        cardCustomerDetailsBill.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                cardCustomerDetailsBillComponentShown(evt);
+            }
+        });
+
+        kGPBackground4.setkBorderRadius(0);
+        kGPBackground4.setkEndColor(new java.awt.Color(102, 255, 153));
+        kGPBackground4.setkGradientFocus(900);
+        kGPBackground4.setkStartColor(new java.awt.Color(51, 153, 255));
+        kGPBackground4.setPreferredSize(new java.awt.Dimension(1370, 710));
+
+        lbCDBLogo.setFont(new java.awt.Font("Algerian", 1, 14)); // NOI18N
+        lbCDBLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer Details Bill.png"))); // NOI18N
+        lbCDBLogo.setText("Customer Details Bill");
+
+        lbSearchCheckOUTDateCDB.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbSearchCheckOUTDateCDB.setText("Search By Check OUT Date:");
+
+        tfSearchCheckOUTDateCDB.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        kbtnSearchCDB.setText("Search");
+        kbtnSearchCDB.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnSearchCDB.setkHoverEndColor(new java.awt.Color(0, 204, 204));
+        kbtnSearchCDB.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kbtnSearchCDB.setkHoverStartColor(new java.awt.Color(153, 255, 0));
+        kbtnSearchCDB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kbtnSearchCDBActionPerformed(evt);
+            }
+        });
+
+        jtbCustomerDetailsBill.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Mobile Number", "Nationality", "Gender", "Email", "IDProof", "Address", "Check IN Date", "Room Number", "Bed", "Room Type", "Price Per Day", "Number Of Days Stay", "Total Amount", "Check OUT Date"
+            }
+        ));
+        jtbCustomerDetailsBill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbCustomerDetailsBillMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jtbCustomerDetailsBill);
+
+        lbClickCDB.setFont(new java.awt.Font("Algerian", 1, 24)); // NOI18N
+        lbClickCDB.setText("*Click on Table Row to Open bill ");
+
+        javax.swing.GroupLayout kGPBackground4Layout = new javax.swing.GroupLayout(kGPBackground4);
+        kGPBackground4.setLayout(kGPBackground4Layout);
+        kGPBackground4Layout.setHorizontalGroup(
+            kGPBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGPBackground4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbSearchCheckOUTDateCDB)
+                .addGap(62, 62, 62)
+                .addComponent(tfSearchCheckOUTDateCDB, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(kbtnSearchCDB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(369, 369, 369))
+            .addGroup(kGPBackground4Layout.createSequentialGroup()
+                .addGroup(kGPBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGPBackground4Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(kGPBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbCDBLogo)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1319, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(kGPBackground4Layout.createSequentialGroup()
+                        .addGap(458, 458, 458)
+                        .addComponent(lbClickCDB)))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        kGPBackground4Layout.setVerticalGroup(
+            kGPBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGPBackground4Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(lbCDBLogo)
+                .addGap(18, 18, 18)
+                .addGroup(kGPBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbSearchCheckOUTDateCDB)
+                    .addComponent(tfSearchCheckOUTDateCDB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kbtnSearchCDB, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(lbClickCDB)
+                .addGap(25, 25, 25))
+        );
+
+        javax.swing.GroupLayout cardCustomerDetailsBillLayout = new javax.swing.GroupLayout(cardCustomerDetailsBill);
+        cardCustomerDetailsBill.setLayout(cardCustomerDetailsBillLayout);
+        cardCustomerDetailsBillLayout.setHorizontalGroup(
+            cardCustomerDetailsBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1370, Short.MAX_VALUE)
+            .addGroup(cardCustomerDetailsBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(cardCustomerDetailsBillLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(kGPBackground4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        cardCustomerDetailsBillLayout.setVerticalGroup(
+            cardCustomerDetailsBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 710, Short.MAX_VALUE)
+            .addGroup(cardCustomerDetailsBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(cardCustomerDetailsBillLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(kGPBackground4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        jpnMain.add(cardCustomerDetailsBill, "card6");
+
         jpnContainer.add(jpnMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 1370, 710));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -710,18 +1137,27 @@ public class home extends javax.swing.JFrame {
         // TODO add your handling code here:
         cardTrangchu.setVisible(false);
         cardManageRoom.setVisible(true);
+        cardCustomerCheckIn.setVisible(false);
+        cardCustomerCheckOut.setVisible(false);
+        cardCustomerDetailsBill.setVisible(false);
     }//GEN-LAST:event_lbManageRoomMouseClicked
 
     private void lbCustomerCheckInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCustomerCheckInMouseClicked
         // TODO add your handling code here:
-//        cardTrangchu.setVisible(false);
-//        cardTaikhoan.setVisible(true);
+        cardTrangchu.setVisible(false);
+        cardManageRoom.setVisible(false);
+        cardCustomerCheckIn.setVisible(true);
+        cardCustomerCheckOut.setVisible(false);
+        cardCustomerDetailsBill.setVisible(false);
     }//GEN-LAST:event_lbCustomerCheckInMouseClicked
 
     private void lbHomePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHomePageMouseClicked
         // TODO add your handling code here:
         cardTrangchu.setVisible(true);
         cardManageRoom.setVisible(false);
+        cardCustomerCheckOut.setVisible(false);
+        cardCustomerCheckIn.setVisible(false);
+        cardCustomerDetailsBill.setVisible(false);
     }//GEN-LAST:event_lbHomePageMouseClicked
 
     private void kbtnAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnAddRoomActionPerformed
@@ -771,6 +1207,334 @@ public class home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cardManageRoomComponentShown
 
+    private void kbtnClearCCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnClearCCIActionPerformed
+        // TODO add your handling code here:
+        tfNameCCI.setText("");
+        tfNameCCI.setText("");
+        tfMobileNumCCI.setText("");
+        tfNationalityCCI.setText("");
+        cbGenderCCI.setSelectedIndex(0);
+        tfEmailCCI.setText("");
+        tfIDProofCCI.setText("");
+        tfAddressCCI.setText("");
+        tfCheckINDateCCI.setText("");
+        cbBedCCI.setSelectedIndex(0);
+        cbRoomTypeCCI.setSelectedIndex(0);
+        cbRoomNumCCI.setSelectedIndex(0);
+        tfPriceCCI.setText("");
+
+        CardLayout cardLayout = (CardLayout) jpnMain.getLayout();
+        cardLayout.show(jpnMain, "cardCustomerCheckIn");
+
+    }//GEN-LAST:event_kbtnClearCCIActionPerformed
+
+    private void cbBedCCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBedCCIActionPerformed
+        // TODO add your handling code here:
+        roomDetails();
+    }//GEN-LAST:event_cbBedCCIActionPerformed
+
+    private void cbRoomTypeCCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRoomTypeCCIActionPerformed
+        // TODO add your handling code here:
+        roomDetails();
+    }//GEN-LAST:event_cbRoomTypeCCIActionPerformed
+
+    private void cbRoomNumCCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRoomNumCCIActionPerformed
+        // TODO add your handling code here:
+        roomNo = (String) cbRoomNumCCI.getSelectedItem();
+        try {
+            ResultSet rs = Select.getData("select * from room where roomNo = '" + roomNo + "'");
+            while (rs.next()) {
+                tfPriceCCI.setText(rs.getString(4));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_cbRoomNumCCIActionPerformed
+
+    private void kbtnAlloteRoomCCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnAlloteRoomCCIActionPerformed
+        // TODO add your handling code here:
+        // Kiểm tra các ô để đảm bảo người dùng đã điền thông tin vào tất cả các ô
+        if (tfNameCCI.getText().isEmpty() || tfMobileNumCCI.getText().isEmpty()
+                || tfNationalityCCI.getText().isEmpty() || tfEmailCCI.getText().isEmpty()
+                || tfIDProofCCI.getText().isEmpty() || tfAddressCCI.getText().isEmpty()
+                || tfCheckINDateCCI.getText().isEmpty() || tfPriceCCI.getText().isEmpty()
+                || cbGenderCCI.getSelectedItem() == null || cbBedCCI.getSelectedItem() == null
+                || cbRoomTypeCCI.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin và chọn phòng trước khi thêm khách hàng mới!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return; // Dừng lại nếu có ô nào bị trống hoặc chưa chọn phòng
+        }
+
+        // Kiểm tra riêng nếu người dùng chưa chọn phòng
+        if (cbRoomNumCCI.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn phòng trước khi thêm khách hàng mới!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            return; // Dừng lại nếu chưa chọn phòng
+        }
+        int id = 1;
+        String name = tfNameCCI.getText();
+        String mobileNumber = tfMobileNumCCI.getText();
+        String nationality = tfNationalityCCI.getText();
+        String gender = (String) cbGenderCCI.getSelectedItem();
+        String email = tfEmailCCI.getText();
+        String idProof = tfIDProofCCI.getText();
+        String address = tfAddressCCI.getText();
+        String checkIN = tfCheckINDateCCI.getText();
+        String bed = (String) cbBedCCI.getSelectedItem();
+        String roomType = (String) cbRoomTypeCCI.getSelectedItem();
+        String roomNo = (String) cbRoomNumCCI.getSelectedItem();
+        String price = tfPriceCCI.getText();
+        String Query = "select max(id) from customer";
+        try {
+            ResultSet rs = Select.getData(Query);
+            while (rs.next()) {
+                id = rs.getInt(1);
+            }
+            id = id + 1;
+
+            if (!price.equals("")) {
+                Query = "update room set status = 'Booked' where roomNo = '" + roomNo + "'";
+                InsertUpdateDelete.setData(Query, "");
+                Query = "insert into customer(id, name, mobileNumber, nationality, gender, email, idProof, address, checkIn, roomNo, bed, roomType, pricePerDay) values(" + id + ", '" + name + "','" + mobileNumber + "', '" + nationality + "', '" + gender + "', '" + email + "', '" + idProof + "', '" + address + "', '" + checkIN + "', '" + roomNo + "', '" + bed + "', '" + roomType + "', '" + price + "')";
+                InsertUpdateDelete.setData(Query, "Customer Check IN Successfully");
+
+                CardLayout cardLayout = (CardLayout) jpnMain.getLayout();
+                cardLayout.show(jpnMain, "cardCustomerCheckIn");
+//                setVisible(false);
+//                new CustomerCheckIn().setVisible(true);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_kbtnAlloteRoomCCIActionPerformed
+
+    private void cardCustomerCheckOutComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cardCustomerCheckOutComponentShown
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jtbCustomerCheckOut.getModel();
+        model.setRowCount(0);
+        ResultSet rs = Select.getData("select * from customer where checkOut is NULL");
+        try {
+            while (rs.next()) {
+                model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13)});
+            }
+            rs.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_cardCustomerCheckOutComponentShown
+
+    private void kbtnSearchCCOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnSearchCCOActionPerformed
+        // TODO add your handling code here:
+        String roomNo = tfRoomNumCCO.getText();
+        try {
+            ResultSet rs = Select.getData("select * from customer where roomNo = '" + roomNo + "' and checkout is NULL");
+            if (rs.next()) {
+                tfRoomNumCCO.setEditable(false);
+                id = rs.getInt(1);
+                tfCustomerNameCCO.setText(rs.getString(2));
+                tfCheckINDateCCO.setText(rs.getString(9));
+                tfCustomerMNCCO.setText(rs.getString(3));
+                tfPricePerDayCCO.setText(rs.getString(13));
+
+                SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
+                Calendar cal = Calendar.getInstance();
+                tfCheckOUTDateCCO.setText(myFormat.format(cal.getTime()));
+                String dateBeforeString = rs.getString(9);
+                java.util.Date dateBefore = myFormat.parse(dateBeforeString);
+                String dateAfterString = myFormat.format(cal.getTime());
+                java.util.Date dateAfter = myFormat.parse(dateAfterString);
+                long difference = dateAfter.getTime() - dateBefore.getTime();
+                int noOfDayStay = (int) (difference / (1000 * 60 * 60 * 24));
+                if (noOfDayStay == 0) {
+                    noOfDayStay = 1;
+                }
+                tfNumDaysStayCCO.setText(String.valueOf(noOfDayStay));
+                float price = Float.parseFloat(tfPricePerDayCCO.getText());
+
+                tfTotalAmountCCO.setText(String.valueOf(noOfDayStay * price));
+                tfEmailCCO.setText(rs.getString(6));
+                roomType = rs.getString(12);
+                bed = rs.getString(11);
+            } else {
+                JOptionPane.showMessageDialog(null, "Room Number is not Booked or Room Number does not Exist");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_kbtnSearchCCOActionPerformed
+
+    private void kbtnClearCCOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnClearCCOActionPerformed
+        // TODO add your handling code here:
+        tfRoomNumCCO.setEditable(true);
+        tfRoomNumCCO.setText("");
+        tfCustomerNameCCO.setText("");
+        tfCheckINDateCCO.setText("");
+        tfCheckOUTDateCCO.setText("");
+        tfCustomerMNCCO.setText("");
+        tfPricePerDayCCO.setText("");
+        tfNumDaysStayCCO.setText("");
+        tfTotalAmountCCO.setText("");
+        tfEmailCCO.setText("");
+        
+        CardLayout cardLayout = (CardLayout) jpnMain.getLayout();
+        cardLayout.show(jpnMain, "cardCustomerCheckOut");
+//        setVisible(false);
+//        new CustomerCheckOut().setVisible(true);
+    }//GEN-LAST:event_kbtnClearCCOActionPerformed
+
+    private void kbtnCheckOutCCOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnCheckOutCCOActionPerformed
+        // TODO add your handling code here:
+        String name = tfCustomerNameCCO.getText();
+        String mobileNumber = tfCustomerMNCCO.getText();
+        String email = tfEmailCCO.getText();
+
+        String checkOut = tfCheckOUTDateCCO.getText();
+        String numberOfDaysStay = tfNumDaysStayCCO.getText();
+        String totalAmount = tfTotalAmountCCO.getText();
+        roomNo = tfRoomNumCCO.getText();
+        Query = "update customer set numberOfDaysStay = '" + numberOfDaysStay + "', totalAmount = '" + totalAmount + "', checkOut = '" + checkOut + "' where id = '" + id + "'";
+        InsertUpdateDelete.setData(Query, "");
+        Query = "update room set Status = 'Not Booked' where roomNo = '" + roomNo + "'";
+        InsertUpdateDelete.setData(Query, "");
+
+        String path = "D:\\";
+        com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
+        try {
+            PdfWriter.getInstance(doc, new FileOutputStream(path + "" + id + ".pdf"));
+            doc.open();
+            Paragraph paragraph1 = new Paragraph("                                                                  LIVIN Hotel\n");
+            doc.add(paragraph1);
+            Paragraph paragraph2 = new Paragraph("****************************************************************************************************************");
+            doc.add(paragraph2);
+            Paragraph paragraph3 = new Paragraph("\tBill ID: " + id + "\nCustomer Details:\nName: " + name + "\nMobile Number: " + mobileNumber + "\nEmail: " + email + "\n");
+            doc.add(paragraph3);
+            doc.add(paragraph2);
+            Paragraph paragraph4 = new Paragraph("\tRoom Details:\nNumber: " + tfRoomNumCCO.getText() + "\nType: " + roomType + "\nBed: " + bed + "\nPrice Per Day: " + tfPricePerDayCCO.getText() + "");
+            doc.add(paragraph4);
+            doc.add(paragraph2);
+            PdfPTable tb1 = new PdfPTable(4);
+            tb1.addCell("Check IN Date: " + tfCheckINDateCCO.getText());
+            tb1.addCell("Check OUT Date: " + checkOut);
+            tb1.addCell("No of Days Stay: " + numberOfDaysStay);
+            tb1.addCell("Total Amount Paid: " + totalAmount);
+            doc.add(tb1);
+            doc.add(paragraph2);
+            Paragraph paragraph5 = new Paragraph("Thank You, See you again.");
+            doc.add(paragraph5);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        doc.close();
+        int a = JOptionPane.showConfirmDialog(null, "Do you want to Print Bill", "Select", JOptionPane.YES_NO_OPTION);
+        if (a == 0) {
+            try {
+                if ((new File("D:\\" + id + ".pdf")).exists()) {
+                    Process p = Runtime
+                            .getRuntime()
+                            .exec("rundll32 url.dll, FileProtocolHandler D:\\" + id + ".pdf");
+                } else {
+                    System.out.println("File is not Exists");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+        }
+
+        CardLayout cardLayout = (CardLayout) jpnMain.getLayout();
+        cardLayout.show(jpnMain, "cardCustomerCheckOut");
+//        setVisible(false);
+//        new CustomerCheckOut().setVisible(true);
+    }//GEN-LAST:event_kbtnCheckOutCCOActionPerformed
+
+    private void lbCustomerCheckOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCustomerCheckOutMouseClicked
+        // TODO add your handling code here:
+        cardTrangchu.setVisible(false);
+        cardManageRoom.setVisible(false);
+        cardCustomerCheckIn.setVisible(false);
+        cardCustomerCheckOut.setVisible(true);
+        cardCustomerDetailsBill.setVisible(false);
+    }//GEN-LAST:event_lbCustomerCheckOutMouseClicked
+
+    private void cardCustomerDetailsBillComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cardCustomerDetailsBillComponentShown
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)jtbCustomerDetailsBill.getModel();
+        model.setRowCount(0);
+        ResultSet rs = Select.getData("select * from customer where checkOut is not NULL");
+        try
+        {
+            while(rs.next())
+            {
+                model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16)});
+            }
+            rs.close();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_cardCustomerDetailsBillComponentShown
+
+    private void kbtnSearchCDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnSearchCDBActionPerformed
+        // TODO add your handling code here:
+        String checkoutDate = tfSearchCheckOUTDateCDB.getText();
+        ResultSet rs = Select.getData("select * from customer where checkOut = '"+checkoutDate+"'");
+        DefaultTableModel model = (DefaultTableModel)jtbCustomerDetailsBill.getModel();
+        model.setRowCount(0);
+        try
+        {
+            while(rs.next())
+            {
+                model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16)});
+            }
+            rs.close();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_kbtnSearchCDBActionPerformed
+
+    private void jtbCustomerDetailsBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbCustomerDetailsBillMouseClicked
+        // TODO add your handling code here:
+        int index = jtbCustomerDetailsBill.getSelectedRow();
+        TableModel model = jtbCustomerDetailsBill.getModel();
+        String id = model.getValueAt(index, 0).toString();
+        try
+        {
+            if((new File("D:\\"+id+".pdf")).exists())
+            {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll, FileProtocolHandler D:\\"+id+".pdf");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "File is not Exists");
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jtbCustomerDetailsBillMouseClicked
+
+    private void lbCustomerDetailsBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCustomerDetailsBillMouseClicked
+        // TODO add your handling code here:
+        cardTrangchu.setVisible(false);
+        cardManageRoom.setVisible(false);
+        cardCustomerCheckIn.setVisible(false);
+        cardCustomerCheckOut.setVisible(false);
+        cardCustomerDetailsBill.setVisible(true);
+    }//GEN-LAST:event_lbCustomerDetailsBillMouseClicked
+
+    private void lbLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogoutMouseClicked
+        // TODO add your handling code here:
+        int a = JOptionPane.showConfirmDialog(null, "Do you really want to Logout", "Select", JOptionPane.YES_NO_OPTION);
+        if(a==0)
+        {
+            setVisible(false);
+            new login().setVisible(true);
+        }
+    }//GEN-LAST:event_lbLogoutMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -808,6 +1572,8 @@ public class home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cardCustomerCheckIn;
+    private javax.swing.JPanel cardCustomerCheckOut;
+    private javax.swing.JPanel cardCustomerDetailsBill;
     private javax.swing.JPanel cardManageRoom;
     private javax.swing.JPanel cardTrangchu;
     private javax.swing.JComboBox<String> cbBedCCI;
@@ -821,28 +1587,46 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JPanel jpnContainer;
     private javax.swing.JPanel jpnMain;
     private javax.swing.JPanel jpnMenuBar;
     private javax.swing.JPanel jpnSlideMenu;
+    private javax.swing.JTable jtbCustomerCheckOut;
+    private javax.swing.JTable jtbCustomerDetailsBill;
     private javax.swing.JTable jtbManageRoom;
     private com.k33ptoo.components.KGradientPanel kGPBackground1;
     private com.k33ptoo.components.KGradientPanel kGPBackground2;
+    private com.k33ptoo.components.KGradientPanel kGPBackground3;
+    private com.k33ptoo.components.KGradientPanel kGPBackground4;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     private com.k33ptoo.components.KButton kbtnAddRoom;
     private com.k33ptoo.components.KButton kbtnAlloteRoomCCI;
+    private com.k33ptoo.components.KButton kbtnCheckOutCCO;
     private com.k33ptoo.components.KButton kbtnClearCCI;
+    private com.k33ptoo.components.KButton kbtnClearCCO;
+    private com.k33ptoo.components.KButton kbtnSearchCCO;
+    private com.k33ptoo.components.KButton kbtnSearchCDB;
     private javax.swing.JLabel lbAddressCCI;
     private javax.swing.JLabel lbBedCCI;
     private javax.swing.JLabel lbBedM;
     private javax.swing.JLabel lbCCILogo;
+    private javax.swing.JLabel lbCCOLogo;
+    private javax.swing.JLabel lbCDBLogo;
     private javax.swing.JLabel lbCheckINDateCCI;
+    private javax.swing.JLabel lbCheckINDateCCO;
+    private javax.swing.JLabel lbCheckOUTDateCCO;
+    private javax.swing.JLabel lbClickCDB;
     private javax.swing.JLabel lbCloseMenu;
     private javax.swing.JLabel lbCustomerCheckIn;
     private javax.swing.JLabel lbCustomerCheckOut;
     private javax.swing.JLabel lbCustomerDetailsBill;
+    private javax.swing.JLabel lbCustomerMNCCO;
+    private javax.swing.JLabel lbCustomerNameCCO;
     private javax.swing.JLabel lbEmailCCI;
+    private javax.swing.JLabel lbEmailCCO;
     private javax.swing.JLabel lbGenderCCI;
     private javax.swing.JLabel lbHomePage;
     private javax.swing.JLabel lbIDProofCCI;
@@ -852,22 +1636,37 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JLabel lbMobileNumCCI;
     private javax.swing.JLabel lbNameCCI;
     private javax.swing.JLabel lbNationalityCCI;
+    private javax.swing.JLabel lbNumDaysStayCCO;
     private javax.swing.JLabel lbOpenMenu;
     private javax.swing.JLabel lbPriceCCI;
     private javax.swing.JLabel lbPriceM;
+    private javax.swing.JLabel lbPricePerDayCCO;
     private javax.swing.JLabel lbRoomNumCCI;
+    private javax.swing.JLabel lbRoomNumCCO;
     private javax.swing.JLabel lbRoomNumberM;
     private javax.swing.JLabel lbRoomTypeCCI;
     private javax.swing.JLabel lbRoomTypeM;
+    private javax.swing.JLabel lbSearchCheckOUTDateCDB;
+    private javax.swing.JLabel lbTotalAmountCCO;
     private javax.swing.JTextField tfAddressCCI;
     private javax.swing.JTextField tfCheckINDateCCI;
+    private javax.swing.JTextField tfCheckINDateCCO;
+    private javax.swing.JTextField tfCheckOUTDateCCO;
+    private javax.swing.JTextField tfCustomerMNCCO;
+    private javax.swing.JTextField tfCustomerNameCCO;
     private javax.swing.JTextField tfEmailCCI;
+    private javax.swing.JTextField tfEmailCCO;
     private javax.swing.JTextField tfIDProofCCI;
     private javax.swing.JTextField tfMobileNumCCI;
     private javax.swing.JTextField tfNameCCI;
     private javax.swing.JTextField tfNationalityCCI;
+    private javax.swing.JTextField tfNumDaysStayCCO;
     private javax.swing.JTextField tfPriceCCI;
     private javax.swing.JTextField tfPriceM;
+    private javax.swing.JTextField tfPricePerDayCCO;
+    private javax.swing.JTextField tfRoomNumCCO;
     private javax.swing.JTextField tfRoomNumberM;
+    private javax.swing.JTextField tfSearchCheckOUTDateCDB;
+    private javax.swing.JTextField tfTotalAmountCCO;
     // End of variables declaration//GEN-END:variables
 }

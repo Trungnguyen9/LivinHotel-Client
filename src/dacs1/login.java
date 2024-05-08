@@ -47,23 +47,25 @@ public class login extends javax.swing.JFrame {
         btnSignupL = new javax.swing.JButton();
         pwfPassL = new javax.swing.JPasswordField();
         jpnSignupForm = new javax.swing.JPanel();
-        lbSignupTitle = new javax.swing.JLabel();
-        lbNameS = new javax.swing.JLabel();
-        lbEmailS = new javax.swing.JLabel();
-        lbPasswordS = new javax.swing.JLabel();
+        kGPSignup = new com.k33ptoo.components.KGradientPanel();
         pwfPassS = new javax.swing.JPasswordField();
         lbSecurityQuesS = new javax.swing.JLabel();
+        lbNameS = new javax.swing.JLabel();
+        lbSignupTitle = new javax.swing.JLabel();
         lbAnswerS = new javax.swing.JLabel();
         lbAddressS = new javax.swing.JLabel();
-        tfNameS = new javax.swing.JTextField();
+        lbPasswordS = new javax.swing.JLabel();
         tfEmailS = new javax.swing.JTextField();
-        tfAnswerS = new javax.swing.JTextField();
+        tfNameS = new javax.swing.JTextField();
+        lbEmailS = new javax.swing.JLabel();
         tfAddressS = new javax.swing.JTextField();
+        tfAnswerS = new javax.swing.JTextField();
         jcbSecurityQuesS = new javax.swing.JComboBox<>();
         btnSignupS = new javax.swing.JButton();
         btnLoginS = new javax.swing.JButton();
         btnForgotPasswordS = new javax.swing.JButton();
         jpnForgotPasswordForm = new javax.swing.JPanel();
+        kGPForgotPass = new com.k33ptoo.components.KGradientPanel();
         lbForgotPassTitle = new javax.swing.JLabel();
         lbEmailF = new javax.swing.JLabel();
         lbSecurityQuesF = new javax.swing.JLabel();
@@ -192,22 +194,23 @@ public class login extends javax.swing.JFrame {
 
         jpnContainer.add(jpnLoginForm, "card2");
 
-        jpnSignupForm.setBackground(new java.awt.Color(204, 255, 255));
+        jpnSignupForm.setBackground(new java.awt.Color(255, 255, 255));
 
-        lbSignupTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        lbSignupTitle.setText("Signup");
+        kGPSignup.setkBorderRadius(0);
+        kGPSignup.setkEndColor(new java.awt.Color(51, 255, 255));
+        kGPSignup.setkGradientFocus(900);
+        kGPSignup.setkStartColor(new java.awt.Color(255, 51, 255));
+        kGPSignup.setOpaque(false);
+        kGPSignup.setPreferredSize(new java.awt.Dimension(1372, 768));
+
+        lbSecurityQuesS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbSecurityQuesS.setText("Security Questions:");
 
         lbNameS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbNameS.setText("Name:");
 
-        lbEmailS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbEmailS.setText("Email:");
-
-        lbPasswordS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbPasswordS.setText("Password:");
-
-        lbSecurityQuesS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbSecurityQuesS.setText("Security Questions:");
+        lbSignupTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lbSignupTitle.setText("Signup");
 
         lbAnswerS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbAnswerS.setText("Answer:");
@@ -215,13 +218,19 @@ public class login extends javax.swing.JFrame {
         lbAddressS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbAddressS.setText("Address:");
 
-        tfNameS.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lbPasswordS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbPasswordS.setText("Password:");
 
         tfEmailS.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        tfAnswerS.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tfNameS.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        lbEmailS.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbEmailS.setText("Email:");
 
         tfAddressS.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        tfAnswerS.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jcbSecurityQuesS.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jcbSecurityQuesS.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What is the name of your first pet?", "What was your first car?", "What elementary school did you attend?", "What is the name of the town where you were born?" }));
@@ -256,18 +265,18 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jpnSignupFormLayout = new javax.swing.GroupLayout(jpnSignupForm);
-        jpnSignupForm.setLayout(jpnSignupFormLayout);
-        jpnSignupFormLayout.setHorizontalGroup(
-            jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnSignupFormLayout.createSequentialGroup()
-                .addGroup(jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnSignupFormLayout.createSequentialGroup()
-                        .addGap(648, 648, 648)
+        javax.swing.GroupLayout kGPSignupLayout = new javax.swing.GroupLayout(kGPSignup);
+        kGPSignup.setLayout(kGPSignupLayout);
+        kGPSignupLayout.setHorizontalGroup(
+            kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGPSignupLayout.createSequentialGroup()
+                .addGap(403, 403, 403)
+                .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGPSignupLayout.createSequentialGroup()
+                        .addGap(236, 236, 236)
                         .addComponent(lbSignupTitle))
-                    .addGroup(jpnSignupFormLayout.createSequentialGroup()
-                        .addGap(412, 412, 412)
-                        .addGroup(jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGPSignupLayout.createSequentialGroup()
+                        .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbNameS)
                             .addComponent(lbEmailS)
                             .addComponent(lbPasswordS)
@@ -275,61 +284,83 @@ public class login extends javax.swing.JFrame {
                             .addComponent(lbAnswerS)
                             .addComponent(lbAddressS))
                         .addGap(39, 39, 39)
-                        .addGroup(jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jpnSignupFormLayout.createSequentialGroup()
+                        .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(kGPSignupLayout.createSequentialGroup()
                                 .addComponent(btnSignupS)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnLoginS)
                                 .addGap(31, 31, 31)
                                 .addComponent(btnForgotPasswordS))
                             .addComponent(tfAnswerS)
-                            .addComponent(jcbSecurityQuesS, 0, 350, Short.MAX_VALUE)
+                            .addComponent(jcbSecurityQuesS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfEmailS, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfNameS, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfAddressS)
-                            .addComponent(pwfPassS))))
-                .addContainerGap(434, Short.MAX_VALUE))
+                            .addComponent(pwfPassS, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(443, Short.MAX_VALUE))
+        );
+        kGPSignupLayout.setVerticalGroup(
+            kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGPSignupLayout.createSequentialGroup()
+                .addGap(206, 206, 206)
+                .addComponent(lbSignupTitle)
+                .addGap(41, 41, 41)
+                .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNameS)
+                    .addComponent(tfNameS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfEmailS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbEmailS))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPasswordS)
+                    .addComponent(pwfPassS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbSecurityQuesS)
+                    .addComponent(jcbSecurityQuesS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbAnswerS)
+                    .addComponent(tfAnswerS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfAddressS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbAddressS))
+                .addGap(18, 18, 18)
+                .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSignupS)
+                    .addComponent(btnLoginS)
+                    .addComponent(btnForgotPasswordS))
+                .addContainerGap(262, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jpnSignupFormLayout = new javax.swing.GroupLayout(jpnSignupForm);
+        jpnSignupForm.setLayout(jpnSignupFormLayout);
+        jpnSignupFormLayout.setHorizontalGroup(
+            jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnSignupFormLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(kGPSignup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpnSignupFormLayout.setVerticalGroup(
             jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnSignupFormLayout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(lbSignupTitle)
-                .addGap(41, 41, 41)
-                .addGroup(jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbNameS)
-                    .addComponent(tfNameS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfEmailS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbEmailS))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbPasswordS)
-                    .addComponent(pwfPassS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbSecurityQuesS)
-                    .addComponent(jcbSecurityQuesS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbAnswerS)
-                    .addComponent(tfAnswerS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfAddressS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbAddressS))
-                .addGap(18, 18, 18)
-                .addGroup(jpnSignupFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSignupS)
-                    .addComponent(btnLoginS)
-                    .addComponent(btnForgotPasswordS))
-                .addContainerGap(299, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(kGPSignup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jpnContainer.add(jpnSignupForm, "card3");
 
         jpnForgotPasswordForm.setBackground(new java.awt.Color(204, 255, 255));
+
+        kGPForgotPass.setkBorderRadius(0);
+        kGPForgotPass.setkEndColor(new java.awt.Color(51, 255, 255));
+        kGPForgotPass.setkStartColor(new java.awt.Color(255, 51, 255));
+        kGPForgotPass.setPreferredSize(new java.awt.Dimension(1372, 768));
 
         lbForgotPassTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbForgotPassTitle.setText("Forgot Password?");
@@ -394,68 +425,87 @@ public class login extends javax.swing.JFrame {
 
         pwfNewPassF.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
+        javax.swing.GroupLayout kGPForgotPassLayout = new javax.swing.GroupLayout(kGPForgotPass);
+        kGPForgotPass.setLayout(kGPForgotPassLayout);
+        kGPForgotPassLayout.setHorizontalGroup(
+            kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGPForgotPassLayout.createSequentialGroup()
+                .addGap(573, 573, 573)
+                .addComponent(lbForgotPassTitle)
+                .addContainerGap(581, Short.MAX_VALUE))
+            .addGroup(kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(kGPForgotPassLayout.createSequentialGroup()
+                    .addGap(383, 383, 383)
+                    .addGroup(kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lbEmailF)
+                        .addComponent(lbSecurityQuesF)
+                        .addComponent(lbAnswerF)
+                        .addComponent(lbNewPassF))
+                    .addGap(54, 54, 54)
+                    .addGroup(kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(kGPForgotPassLayout.createSequentialGroup()
+                            .addComponent(btnSaveF)
+                            .addGap(38, 38, 38)
+                            .addComponent(btnSignupF)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLoginF))
+                        .addComponent(tfEmailF)
+                        .addComponent(tfSecurityQuesF)
+                        .addComponent(tfAnswerF)
+                        .addComponent(pwfNewPassF))
+                    .addGap(42, 42, 42)
+                    .addComponent(btnSearchF)
+                    .addGap(384, 384, 384)))
+        );
+        kGPForgotPassLayout.setVerticalGroup(
+            kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGPForgotPassLayout.createSequentialGroup()
+                .addGap(210, 210, 210)
+                .addComponent(lbForgotPassTitle)
+                .addContainerGap(529, Short.MAX_VALUE))
+            .addGroup(kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(kGPForgotPassLayout.createSequentialGroup()
+                    .addGap(282, 282, 282)
+                    .addGroup(kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(kGPForgotPassLayout.createSequentialGroup()
+                            .addGroup(kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lbEmailF)
+                                .addComponent(tfEmailF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSearchF))
+                            .addGap(37, 37, 37)
+                            .addComponent(lbSecurityQuesF))
+                        .addComponent(tfSecurityQuesF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(38, 38, 38)
+                    .addGroup(kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbAnswerF)
+                        .addComponent(tfAnswerF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(38, 38, 38)
+                    .addGroup(kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbNewPassF)
+                        .addComponent(pwfNewPassF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(34, 34, 34)
+                    .addGroup(kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnSaveF)
+                        .addComponent(btnSignupF)
+                        .addComponent(btnLoginF))
+                    .addContainerGap(236, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout jpnForgotPasswordFormLayout = new javax.swing.GroupLayout(jpnForgotPasswordForm);
         jpnForgotPasswordForm.setLayout(jpnForgotPasswordFormLayout);
         jpnForgotPasswordFormLayout.setHorizontalGroup(
             jpnForgotPasswordFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnForgotPasswordFormLayout.createSequentialGroup()
-                .addGroup(jpnForgotPasswordFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnForgotPasswordFormLayout.createSequentialGroup()
-                        .addGap(563, 563, 563)
-                        .addComponent(lbForgotPassTitle)
-                        .addGap(200, 200, 200))
-                    .addGroup(jpnForgotPasswordFormLayout.createSequentialGroup()
-                        .addGap(376, 376, 376)
-                        .addGroup(jpnForgotPasswordFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbEmailF)
-                            .addComponent(lbSecurityQuesF)
-                            .addComponent(lbAnswerF)
-                            .addComponent(lbNewPassF))
-                        .addGap(54, 54, 54)
-                        .addGroup(jpnForgotPasswordFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpnForgotPasswordFormLayout.createSequentialGroup()
-                                .addComponent(btnSaveF)
-                                .addGap(38, 38, 38)
-                                .addComponent(btnSignupF)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLoginF))
-                            .addComponent(tfEmailF)
-                            .addComponent(tfSecurityQuesF)
-                            .addComponent(tfAnswerF)
-                            .addComponent(pwfNewPassF))
-                        .addGap(42, 42, 42)
-                        .addComponent(btnSearchF)))
-                .addGap(391, 391, 391))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(kGPForgotPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpnForgotPasswordFormLayout.setVerticalGroup(
             jpnForgotPasswordFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnForgotPasswordFormLayout.createSequentialGroup()
-                .addGap(228, 228, 228)
-                .addComponent(lbForgotPassTitle)
-                .addGap(18, 18, 18)
-                .addGroup(jpnForgotPasswordFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jpnForgotPasswordFormLayout.createSequentialGroup()
-                        .addGroup(jpnForgotPasswordFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbEmailF)
-                            .addComponent(tfEmailF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearchF))
-                        .addGap(37, 37, 37)
-                        .addComponent(lbSecurityQuesF))
-                    .addComponent(tfSecurityQuesF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(jpnForgotPasswordFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbAnswerF)
-                    .addComponent(tfAnswerF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(jpnForgotPasswordFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbNewPassF)
-                    .addComponent(pwfNewPassF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jpnForgotPasswordFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSaveF)
-                    .addComponent(btnSignupF)
-                    .addComponent(btnLoginF))
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(kGPForgotPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jpnContainer.add(jpnForgotPasswordForm, "card4");
@@ -685,6 +735,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JPanel jpnForgotPasswordForm;
     private javax.swing.JPanel jpnLoginForm;
     private javax.swing.JPanel jpnSignupForm;
+    private com.k33ptoo.components.KGradientPanel kGPForgotPass;
+    private com.k33ptoo.components.KGradientPanel kGPSignup;
     private javax.swing.JLabel lbAddressS;
     private javax.swing.JLabel lbAnswerF;
     private javax.swing.JLabel lbAnswerS;
