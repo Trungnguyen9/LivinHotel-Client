@@ -12,6 +12,18 @@ import java.sql.*;
 import project.*;
 import project.InsertUpdateDelete;
 
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+
 /**
  *
  * @author ASUS
@@ -584,16 +596,107 @@ public class login extends javax.swing.JFrame {
             String Query;
             Query = "insert into users values('" + name + "','" + email + "','" + password + "','" + securityQuestion + "', '" + answer + "', '" + address + "','false')";
             InsertUpdateDelete.setData(Query, "Registered Successfully");
+            
+            // Tạo hoặc cập nhật tệp XML
+        try {
+            File xmlFile = new File("C:\\Users\\ASUS\\Downloads\\XML\\usershotel.xml");
+            Document document;
+
+            if (xmlFile.exists()) {
+                // Nếu tệp đã tồn tại, load tài liệu XML từ tệp đó
+                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+                document = docBuilder.parse(xmlFile);
+
+                // Tìm phần tử gốc <users>
+                Element usersElement = (Element) document.getElementsByTagName("users").item(0);
+
+                // Tạo các phần tử con và gắn chúng vào phần tử gốc
+                Element userElement = document.createElement("user");
+                usersElement.appendChild(userElement);
+
+                Element nameElement = document.createElement("name");
+                nameElement.appendChild(document.createTextNode(name));
+                userElement.appendChild(nameElement);
+
+                Element emailElement = document.createElement("email");
+                emailElement.appendChild(document.createTextNode(email));
+                userElement.appendChild(emailElement);
+
+                Element passwordElement = document.createElement("password");
+                passwordElement.appendChild(document.createTextNode(password));
+                userElement.appendChild(passwordElement);
+
+                Element securityQuestionElement = document.createElement("securityQuestion");
+                securityQuestionElement.appendChild(document.createTextNode(securityQuestion));
+                userElement.appendChild(securityQuestionElement);
+
+                Element answerElement = document.createElement("answer");
+                answerElement.appendChild(document.createTextNode(answer));
+                userElement.appendChild(answerElement);
+
+                Element addressElement = document.createElement("address");
+                addressElement.appendChild(document.createTextNode(address));
+                userElement.appendChild(addressElement);
+
+            } else {
+                // Nếu tệp chưa tồn tại, tạo một tài liệu XML mới và thêm dữ liệu vào đó
+                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+                document = docBuilder.newDocument();
+
+                // Tạo phần tử gốc <users>
+                Element usersElement = document.createElement("users");
+                document.appendChild(usersElement);
+
+                // Tạo các phần tử con và gắn chúng vào phần tử gốc
+                Element userElement = document.createElement("user");
+                usersElement.appendChild(userElement);
+
+                Element nameElement = document.createElement("name");
+                nameElement.appendChild(document.createTextNode(name));
+                userElement.appendChild(nameElement);
+
+                Element emailElement = document.createElement("email");
+                emailElement.appendChild(document.createTextNode(email));
+                userElement.appendChild(emailElement);
+
+                Element passwordElement = document.createElement("password");
+                passwordElement.appendChild(document.createTextNode(password));
+                userElement.appendChild(passwordElement);
+
+                Element securityQuestionElement = document.createElement("securityQuestion");
+                securityQuestionElement.appendChild(document.createTextNode(securityQuestion));
+                userElement.appendChild(securityQuestionElement);
+
+                Element answerElement = document.createElement("answer");
+                answerElement.appendChild(document.createTextNode(answer));
+                userElement.appendChild(answerElement);
+
+                Element addressElement = document.createElement("address");
+                addressElement.appendChild(document.createTextNode(address));
+                userElement.appendChild(addressElement);
+            }
+
+            // Tạo một đối tượng Transformer để ghi tài liệu XML đã cập nhật hoặc mới vào tệp
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
+            // Ghi tài liệu XML vào tệp
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(xmlFile);
+            transformer.transform(source, result);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
 //            CardLayout cardLayout = (CardLayout) jpnContainer.getLayout();
 //            cardLayout.show(jpnContainer, "jpnLoginForm"); 
             jpnSignupForm.setVisible(true);
             jpnLoginForm.setVisible(false);
             jpnForgotPasswordForm.setVisible(false);
-////            CardLayout cardLayout = (CardLayout) jpnContainer.getLayout();
-////        cardLayout.show(jpnContainer, "jpnSignupForm");
-//            setVisible(false);
-////            new signup().setVisible(true);
         }
     }//GEN-LAST:event_btnSignupSActionPerformed
 

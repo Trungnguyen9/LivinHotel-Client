@@ -17,9 +17,14 @@ import java.util.Calendar;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Image;
 import java.io.File;
 import java.io.FileOutputStream;
+import javax.swing.ImageIcon;
 import javax.swing.table.TableModel;
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -37,7 +42,7 @@ public class home extends javax.swing.JFrame {
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy/MM/dd");
         Calendar cal = Calendar.getInstance();
         tfCheckINDateCCI.setText(myFormat.format(cal.getTime()));
-        
+
         tfSearchCheckOUTDateCDB.setText(myFormat.format(cal.getTime()));
 
         tfCustomerNameCCO.setEditable(false);
@@ -151,6 +156,7 @@ public class home extends javax.swing.JFrame {
         lbHomePage = new javax.swing.JLabel();
         kGradientPanel1 = new com.k33ptoo.components.KGradientPanel();
         jpnMenuBar = new javax.swing.JPanel();
+        kGradientPanel3 = new com.k33ptoo.components.KGradientPanel();
         lbOpenMenu = new javax.swing.JLabel();
         jpnMain = new javax.swing.JPanel();
         cardTrangchu = new javax.swing.JPanel();
@@ -169,6 +175,13 @@ public class home extends javax.swing.JFrame {
         lbPriceM = new javax.swing.JLabel();
         tfPriceM = new javax.swing.JTextField();
         kbtnAddRoom = new com.k33ptoo.components.KButton();
+        kButton1 = new com.k33ptoo.components.KButton();
+        kbtnUpdateRoom = new com.k33ptoo.components.KButton();
+        kbtnFindRoom = new com.k33ptoo.components.KButton();
+        kbtnResetMR = new com.k33ptoo.components.KButton();
+        kbtnUploadImg = new com.k33ptoo.components.KButton();
+        lbPicture = new javax.swing.JLabel();
+        lbImgContainer = new javax.swing.JLabel();
         cardCustomerCheckIn = new javax.swing.JPanel();
         kGPBackground2 = new com.k33ptoo.components.KGradientPanel();
         lbCCILogo = new javax.swing.JLabel();
@@ -375,6 +388,12 @@ public class home extends javax.swing.JFrame {
         jpnMenuBar.setBackground(new java.awt.Color(255, 255, 255));
         jpnMenuBar.setPreferredSize(new java.awt.Dimension(1366, 100));
 
+        kGradientPanel3.setkBorderRadius(0);
+        kGradientPanel3.setkEndColor(new java.awt.Color(51, 153, 255));
+        kGradientPanel3.setkGradientFocus(900);
+        kGradientPanel3.setkStartColor(new java.awt.Color(255, 255, 255));
+        kGradientPanel3.setPreferredSize(new java.awt.Dimension(1366, 100));
+
         lbOpenMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/menu.png"))); // NOI18N
         lbOpenMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -382,24 +401,41 @@ public class home extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
+        kGradientPanel3.setLayout(kGradientPanel3Layout);
+        kGradientPanel3Layout.setHorizontalGroup(
+            kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel3Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(lbOpenMenu)
+                .addContainerGap(1304, Short.MAX_VALUE))
+        );
+        kGradientPanel3Layout.setVerticalGroup(
+            kGradientPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(kGradientPanel3Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(lbOpenMenu)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jpnMenuBarLayout = new javax.swing.GroupLayout(jpnMenuBar);
         jpnMenuBar.setLayout(jpnMenuBarLayout);
         jpnMenuBarLayout.setHorizontalGroup(
             jpnMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnMenuBarLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(lbOpenMenu)
-                .addContainerGap(1301, Short.MAX_VALUE))
+                .addGap(0, 2, Short.MAX_VALUE)
+                .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
         );
         jpnMenuBarLayout.setVerticalGroup(
             jpnMenuBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnMenuBarLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(lbOpenMenu)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(kGradientPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jpnContainer.add(jpnMenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1356, 60));
+        jpnContainer.add(jpnMenuBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 60));
 
         jpnMain.setLayout(new java.awt.CardLayout());
 
@@ -445,7 +481,7 @@ public class home extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Room Number", "Room Type", "Bed", "Price", "Status"
+                "Room Number", "Room Type", "Bed", "Price", "Status", "Image"
             }
         ));
         jScrollPane1.setViewportView(jtbManageRoom);
@@ -456,19 +492,19 @@ public class home extends javax.swing.JFrame {
         tfRoomNumberM.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         lbRoomTypeM.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbRoomTypeM.setText("RoomType:");
+        lbRoomTypeM.setText("RoomType       :");
 
         cbRoomTypeM.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cbRoomTypeM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "None-AC" }));
 
         lbBedM.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbBedM.setText("Bed:");
+        lbBedM.setText("Bed                   :");
 
         cbBedM.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         cbBedM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Double", "Triple" }));
 
         lbPriceM.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbPriceM.setText("Price:");
+        lbPriceM.setText("Price                 :");
 
         tfPriceM.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
@@ -483,57 +519,136 @@ public class home extends javax.swing.JFrame {
             }
         });
 
+        kButton1.setText("Delete Room");
+        kButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kButton1.setkHoverEndColor(new java.awt.Color(0, 204, 204));
+        kButton1.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kButton1.setkHoverStartColor(new java.awt.Color(135, 255, 0));
+
+        kbtnUpdateRoom.setText("Update Room");
+        kbtnUpdateRoom.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnUpdateRoom.setkHoverEndColor(new java.awt.Color(0, 204, 204));
+        kbtnUpdateRoom.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kbtnUpdateRoom.setkHoverStartColor(new java.awt.Color(135, 255, 0));
+
+        kbtnFindRoom.setText("Find Room");
+        kbtnFindRoom.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnFindRoom.setkHoverEndColor(new java.awt.Color(0, 204, 204));
+        kbtnFindRoom.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kbtnFindRoom.setkHoverStartColor(new java.awt.Color(135, 255, 0));
+
+        kbtnResetMR.setText("Reset");
+        kbtnResetMR.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnResetMR.setkEndColor(new java.awt.Color(255, 204, 255));
+        kbtnResetMR.setkHoverEndColor(new java.awt.Color(255, 102, 153));
+        kbtnResetMR.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kbtnResetMR.setkHoverStartColor(new java.awt.Color(255, 204, 204));
+        kbtnResetMR.setkStartColor(new java.awt.Color(255, 102, 102));
+
+        kbtnUploadImg.setText("Upload");
+        kbtnUploadImg.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnUploadImg.setkHoverEndColor(new java.awt.Color(0, 204, 204));
+        kbtnUploadImg.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kbtnUploadImg.setkHoverStartColor(new java.awt.Color(135, 255, 0));
+
+        lbPicture.setText("Picture:");
+
+        lbImgContainer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        lbImgContainer.setMaximumSize(new java.awt.Dimension(6, 6));
+        lbImgContainer.setMinimumSize(new java.awt.Dimension(6, 6));
+        lbImgContainer.setPreferredSize(new java.awt.Dimension(6, 6));
+
         javax.swing.GroupLayout kGPBackground1Layout = new javax.swing.GroupLayout(kGPBackground1);
         kGPBackground1.setLayout(kGPBackground1Layout);
         kGPBackground1Layout.setHorizontalGroup(
             kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGPBackground1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lbMRLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(kGPBackground1Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbRoomNumberM)
-                    .addComponent(tfRoomNumberM)
-                    .addComponent(lbRoomTypeM)
-                    .addComponent(lbBedM, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfPriceM)
-                    .addComponent(kbtnAddRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbPriceM)
-                    .addComponent(cbRoomTypeM, 0, 465, Short.MAX_VALUE)
-                    .addComponent(cbBedM, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(70, 70, 70))
+                    .addGroup(kGPBackground1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbMRLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(kbtnAddRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbRoomTypeM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lbRoomNumberM)
+                                    .addComponent(lbPriceM)
+                                    .addComponent(lbBedM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(kGPBackground1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(kGPBackground1Layout.createSequentialGroup()
+                                        .addComponent(kButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(kbtnUpdateRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfRoomNumberM)
+                                        .addComponent(cbRoomTypeM, 0, 200, Short.MAX_VALUE)
+                                        .addComponent(cbBedM, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfPriceM)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(kbtnFindRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(kbtnResetMR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGPBackground1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(kbtnUploadImg, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbPicture))
+                                .addGap(37, 37, 37)))
+                        .addComponent(lbImgContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))
+                    .addGroup(kGPBackground1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         kGPBackground1Layout.setVerticalGroup(
             kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGPBackground1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(lbMRLogo)
-                .addGap(31, 31, 31)
                 .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(kGPBackground1Layout.createSequentialGroup()
-                        .addComponent(lbRoomNumberM)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfRoomNumberM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbRoomTypeM)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbRoomTypeM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(lbBedM)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbBedM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(lbPriceM)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfPriceM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(kbtnAddRoom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                        .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbMRLogo)
+                            .addGroup(kGPBackground1Layout.createSequentialGroup()
+                                .addComponent(lbPicture)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(kbtnUploadImg, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbRoomNumberM)
+                            .addComponent(tfRoomNumberM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbRoomTypeM)
+                            .addComponent(cbRoomTypeM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(kGPBackground1Layout.createSequentialGroup()
+                                .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbBedM, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cbBedM, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbPriceM)
+                                    .addComponent(tfPriceM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(kbtnResetMR, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(kbtnAddRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                            .addComponent(kbtnUpdateRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(kbtnFindRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(kGPBackground1Layout.createSequentialGroup()
+                        .addComponent(lbImgContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout cardManageRoomLayout = new javax.swing.GroupLayout(cardManageRoom);
@@ -1176,20 +1291,6 @@ public class home extends javax.swing.JFrame {
         // Chuyển sang card quản lý phòng
         CardLayout cardLayout = (CardLayout) jpnMain.getLayout();
         cardLayout.show(jpnMain, "cardManageRoom");
-//        String roomNo = tfRoomNumberM.getText();
-//        String roomType = (String) cbRoomTypeM.getSelectedItem();
-//        String bed = (String) cbBedM.getSelectedItem();
-//        String price = tfPriceM.getText();
-//
-//        String Query = "insert into room values('" + roomNo + "', '" + roomType + "', '" + bed + "', '" + price + "', 'Not Booked')";
-//        InsertUpdateDelete.setData(Query, "Sucessfully Updated");
-//
-//        CardLayout cardLayout = (CardLayout) jpnMain.getLayout();
-//        cardLayout.show(jpnMain, "cardManageRoom");
-////        cardTrangchu.setVisible(false);
-////        cardManageRoom.setVisible(true);
-////        setVisible(false);
-////        new manageRoom().setVisible(true);
     }//GEN-LAST:event_kbtnAddRoomActionPerformed
 
     private void cardManageRoomComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cardManageRoomComponentShown
@@ -1373,7 +1474,7 @@ public class home extends javax.swing.JFrame {
         tfNumDaysStayCCO.setText("");
         tfTotalAmountCCO.setText("");
         tfEmailCCO.setText("");
-        
+
         CardLayout cardLayout = (CardLayout) jpnMain.getLayout();
         cardLayout.show(jpnMain, "cardCustomerCheckOut");
 //        setVisible(false);
@@ -1455,19 +1556,15 @@ public class home extends javax.swing.JFrame {
 
     private void cardCustomerDetailsBillComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cardCustomerDetailsBillComponentShown
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel)jtbCustomerDetailsBill.getModel();
+        DefaultTableModel model = (DefaultTableModel) jtbCustomerDetailsBill.getModel();
         model.setRowCount(0);
         ResultSet rs = Select.getData("select * from customer where checkOut is not NULL");
-        try
-        {
-            while(rs.next())
-            {
+        try {
+            while (rs.next()) {
                 model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16)});
             }
             rs.close();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_cardCustomerDetailsBillComponentShown
@@ -1475,19 +1572,15 @@ public class home extends javax.swing.JFrame {
     private void kbtnSearchCDBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnSearchCDBActionPerformed
         // TODO add your handling code here:
         String checkoutDate = tfSearchCheckOUTDateCDB.getText();
-        ResultSet rs = Select.getData("select * from customer where checkOut = '"+checkoutDate+"'");
-        DefaultTableModel model = (DefaultTableModel)jtbCustomerDetailsBill.getModel();
+        ResultSet rs = Select.getData("select * from customer where checkOut = '" + checkoutDate + "'");
+        DefaultTableModel model = (DefaultTableModel) jtbCustomerDetailsBill.getModel();
         model.setRowCount(0);
-        try
-        {
-            while(rs.next())
-            {
+        try {
+            while (rs.next()) {
                 model.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15), rs.getString(16)});
             }
             rs.close();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_kbtnSearchCDBActionPerformed
@@ -1497,21 +1590,15 @@ public class home extends javax.swing.JFrame {
         int index = jtbCustomerDetailsBill.getSelectedRow();
         TableModel model = jtbCustomerDetailsBill.getModel();
         String id = model.getValueAt(index, 0).toString();
-        try
-        {
-            if((new File("D:\\"+id+".pdf")).exists())
-            {
+        try {
+            if ((new File("D:\\" + id + ".pdf")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll, FileProtocolHandler D:\\"+id+".pdf");
-            }
-            else
-            {
+                        .exec("rundll32 url.dll, FileProtocolHandler D:\\" + id + ".pdf");
+            } else {
                 JOptionPane.showMessageDialog(null, "File is not Exists");
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jtbCustomerDetailsBillMouseClicked
@@ -1528,8 +1615,7 @@ public class home extends javax.swing.JFrame {
     private void lbLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbLogoutMouseClicked
         // TODO add your handling code here:
         int a = JOptionPane.showConfirmDialog(null, "Do you really want to Logout", "Select", JOptionPane.YES_NO_OPTION);
-        if(a==0)
-        {
+        if (a == 0) {
             setVisible(false);
             new login().setVisible(true);
         }
@@ -1597,18 +1683,24 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JTable jtbCustomerCheckOut;
     private javax.swing.JTable jtbCustomerDetailsBill;
     private javax.swing.JTable jtbManageRoom;
+    private com.k33ptoo.components.KButton kButton1;
     private com.k33ptoo.components.KGradientPanel kGPBackground1;
     private com.k33ptoo.components.KGradientPanel kGPBackground2;
     private com.k33ptoo.components.KGradientPanel kGPBackground3;
     private com.k33ptoo.components.KGradientPanel kGPBackground4;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
+    private com.k33ptoo.components.KGradientPanel kGradientPanel3;
     private com.k33ptoo.components.KButton kbtnAddRoom;
     private com.k33ptoo.components.KButton kbtnAlloteRoomCCI;
     private com.k33ptoo.components.KButton kbtnCheckOutCCO;
     private com.k33ptoo.components.KButton kbtnClearCCI;
     private com.k33ptoo.components.KButton kbtnClearCCO;
+    private com.k33ptoo.components.KButton kbtnFindRoom;
+    private com.k33ptoo.components.KButton kbtnResetMR;
     private com.k33ptoo.components.KButton kbtnSearchCCO;
     private com.k33ptoo.components.KButton kbtnSearchCDB;
+    private com.k33ptoo.components.KButton kbtnUpdateRoom;
+    private com.k33ptoo.components.KButton kbtnUploadImg;
     private javax.swing.JLabel lbAddressCCI;
     private javax.swing.JLabel lbBedCCI;
     private javax.swing.JLabel lbBedM;
@@ -1630,6 +1722,7 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JLabel lbGenderCCI;
     private javax.swing.JLabel lbHomePage;
     private javax.swing.JLabel lbIDProofCCI;
+    private javax.swing.JLabel lbImgContainer;
     private javax.swing.JLabel lbLogout;
     private javax.swing.JLabel lbMRLogo;
     private javax.swing.JLabel lbManageRoom;
@@ -1638,6 +1731,7 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JLabel lbNationalityCCI;
     private javax.swing.JLabel lbNumDaysStayCCO;
     private javax.swing.JLabel lbOpenMenu;
+    private javax.swing.JLabel lbPicture;
     private javax.swing.JLabel lbPriceCCI;
     private javax.swing.JLabel lbPriceM;
     private javax.swing.JLabel lbPricePerDayCCO;
