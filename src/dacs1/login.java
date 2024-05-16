@@ -4,6 +4,7 @@
  */
 package dacs1;
 
+import contact.ChatContainer;
 import java.awt.CardLayout;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -58,6 +59,7 @@ public class login extends javax.swing.JFrame {
         btnForgotPassL = new javax.swing.JButton();
         btnSignupL = new javax.swing.JButton();
         pwfPassL = new javax.swing.JPasswordField();
+        kbtnContact = new com.k33ptoo.components.KButton();
         jpnSignupForm = new javax.swing.JPanel();
         kGPSignup = new com.k33ptoo.components.KGradientPanel();
         pwfPassS = new javax.swing.JPasswordField();
@@ -147,6 +149,16 @@ public class login extends javax.swing.JFrame {
 
         pwfPassL.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
+        kbtnContact.setText("Contact");
+        kbtnContact.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnContact.setkHoverEndColor(new java.awt.Color(255, 255, 204));
+        kbtnContact.setkHoverStartColor(new java.awt.Color(255, 153, 153));
+        kbtnContact.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kbtnContactActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnLoginFormLayout = new javax.swing.GroupLayout(jpnLoginForm);
         jpnLoginForm.setLayout(jpnLoginFormLayout);
         jpnLoginFormLayout.setHorizontalGroup(
@@ -162,15 +174,17 @@ public class login extends javax.swing.JFrame {
                             .addComponent(lbEmailL)
                             .addComponent(lbPasswordL))
                         .addGap(47, 47, 47)
-                        .addGroup(jpnLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jpnLoginFormLayout.createSequentialGroup()
-                                .addComponent(btnLoginL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSignupL)
-                                .addGap(12, 12, 12)
-                                .addComponent(btnForgotPassL, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tfEmailL, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pwfPassL, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addGroup(jpnLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(kbtnContact, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jpnLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jpnLoginFormLayout.createSequentialGroup()
+                                    .addComponent(btnLoginL)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnSignupL)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(btnForgotPassL, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfEmailL, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(pwfPassL, javax.swing.GroupLayout.Alignment.LEADING)))))
                 .addGap(472, 472, 472))
             .addGroup(jpnLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jpnLoginFormLayout.createSequentialGroup()
@@ -196,7 +210,9 @@ public class login extends javax.swing.JFrame {
                     .addComponent(btnLoginL)
                     .addComponent(btnForgotPassL)
                     .addComponent(btnSignupL))
-                .addContainerGap(307, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(kbtnContact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(212, Short.MAX_VALUE))
             .addGroup(jpnLoginFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jpnLoginFormLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -786,6 +802,11 @@ public class login extends javax.swing.JFrame {
         jpnForgotPasswordForm.setVisible(false);
     }//GEN-LAST:event_btnLoginFActionPerformed
 
+    private void kbtnContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnContactActionPerformed
+        // TODO add your handling code here:
+        new ChatContainer().setVisible(true);
+    }//GEN-LAST:event_kbtnContactActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -840,6 +861,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JPanel jpnSignupForm;
     private com.k33ptoo.components.KGradientPanel kGPForgotPass;
     private com.k33ptoo.components.KGradientPanel kGPSignup;
+    private com.k33ptoo.components.KButton kbtnContact;
     private javax.swing.JLabel lbAddressS;
     private javax.swing.JLabel lbAnswerF;
     private javax.swing.JLabel lbAnswerS;
