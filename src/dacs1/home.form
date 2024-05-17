@@ -495,36 +495,36 @@
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="kbtnDeleteRoom" min="-2" pref="100" max="-2" attributes="0"/>
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="kbtnUpdateRoom" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="kbtnFindRoom" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  <Component id="kbtnResetMR" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <Component id="kbtnDeleteRoom" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Component id="kbtnUpdateRoom" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                      <Group type="103" groupAlignment="0" attributes="0">
+                                                          <Component id="kbtnFindRoom" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                                          <Component id="kbtnResetMR" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="tfRoomNumberM" max="32767" attributes="0"/>
+                                                      <Component id="cbRoomTypeM" pref="200" max="32767" attributes="0"/>
+                                                      <Component id="cbBedM" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="tfPriceM" max="32767" attributes="0"/>
+                                                  </Group>
                                               </Group>
-                                              <EmptySpace pref="516" max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
+                                              <Component id="lbImgContainer" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="tfRoomNumberM" max="32767" attributes="0"/>
-                                                  <Component id="cbRoomTypeM" pref="200" max="32767" attributes="0"/>
-                                                  <Component id="cbBedM" alignment="0" max="32767" attributes="0"/>
-                                                  <Component id="tfPriceM" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="32767" attributes="0"/>
+                                              <EmptySpace min="-2" pref="839" max="-2" attributes="0"/>
                                               <Component id="lbPicture" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="timetxt" max="32767" attributes="0"/>
-                                          <Component id="lbImgContainer" pref="315" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="621" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -534,21 +534,14 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Component id="timetxt" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="lbImgContainer" min="-2" pref="180" max="-2" attributes="0"/>
-                                  </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="lbMRLogo" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="lbRoomNumberM" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="tfRoomNumberM" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lbPicture" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -577,6 +570,12 @@
                                           <Component id="kbtnUpdateRoom" alignment="3" pref="44" max="32767" attributes="0"/>
                                           <Component id="kbtnFindRoom" alignment="3" pref="0" max="32767" attributes="0"/>
                                       </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="lbPicture" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="lbImgContainer" min="-2" pref="205" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -842,21 +841,22 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbPicture">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Picture:"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Algerian" size="14" style="1"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Livin Hotel"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lbImgContainer">
                       <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/images/best-hotels-booking-pool-vacation-wallpaper-preview.jpg"/>
+                        </Property>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                            <LineBorder thickness="3"/>
+                          <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                            <BevelBorder/>
                           </Border>
                         </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="timetxt">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jLabel4"/>
                       </Properties>
                     </Component>
                   </SubComponents>

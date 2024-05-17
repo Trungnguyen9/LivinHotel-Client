@@ -13,15 +13,21 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import javax.swing.table.TableModel;
 
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.Timer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -57,7 +63,6 @@ public class home extends javax.swing.JFrame {
     String roomType;
     String roomNo;
     String price;
-    
 
     int id = 0;
     String Query;
@@ -117,7 +122,7 @@ public class home extends javax.swing.JFrame {
     }
 
     private void refreshRoomTable() {
-    DefaultTableModel model = (DefaultTableModel) jtbManageRoom.getModel();
+        DefaultTableModel model = (DefaultTableModel) jtbManageRoom.getModel();
         model.setRowCount(0); // Xóa hết các dòng hiện tại trên bảng
 
         // Lấy dữ liệu từ cơ sở dữ liệu và thêm vào bảng
@@ -130,8 +135,7 @@ public class home extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-}
-
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -182,7 +186,6 @@ public class home extends javax.swing.JFrame {
         kbtnResetMR = new com.k33ptoo.components.KButton();
         lbPicture = new javax.swing.JLabel();
         lbImgContainer = new javax.swing.JLabel();
-        timetxt = new javax.swing.JLabel();
         cardCustomerCheckIn = new javax.swing.JPanel();
         kGPBackground2 = new com.k33ptoo.components.KGradientPanel();
         lbCCILogo = new javax.swing.JLabel();
@@ -571,11 +574,11 @@ public class home extends javax.swing.JFrame {
             }
         });
 
-        lbPicture.setText("Picture:");
+        lbPicture.setFont(new java.awt.Font("Algerian", 1, 14)); // NOI18N
+        lbPicture.setText("Livin Hotel");
 
-        lbImgContainer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-
-        timetxt.setText("jLabel4");
+        lbImgContainer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/best-hotels-booking-pool-vacation-wallpaper-preview.jpg"))); // NOI18N
+        lbImgContainer.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout kGPBackground1Layout = new javax.swing.GroupLayout(kGPBackground1);
         kGPBackground1.setLayout(kGPBackground1Layout);
@@ -597,49 +600,42 @@ public class home extends javax.swing.JFrame {
                                     .addComponent(lbRoomNumberM)
                                     .addComponent(lbPriceM)
                                     .addComponent(lbBedM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(kGPBackground1Layout.createSequentialGroup()
-                                .addComponent(kbtnDeleteRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(kbtnUpdateRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(kbtnFindRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(kbtnResetMR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, Short.MAX_VALUE))
+                                    .addGroup(kGPBackground1Layout.createSequentialGroup()
+                                        .addComponent(kbtnDeleteRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(kbtnUpdateRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(kbtnFindRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(kbtnResetMR, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfRoomNumberM)
+                                        .addComponent(cbRoomTypeM, 0, 200, Short.MAX_VALUE)
+                                        .addComponent(cbBedM, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfPriceM)))
+                                .addGap(228, 228, 228)
+                                .addComponent(lbImgContainer))
                             .addGroup(kGPBackground1Layout.createSequentialGroup()
-                                .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfRoomNumberM)
-                                    .addComponent(cbRoomTypeM, 0, 200, Short.MAX_VALUE)
-                                    .addComponent(cbBedM, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfPriceM))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lbPicture)
-                                .addGap(37, 37, 37)))
-                        .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(timetxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lbImgContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)))
+                                .addGap(839, 839, 839)
+                                .addComponent(lbPicture)))
+                        .addGap(621, 621, 621)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         kGPBackground1Layout.setVerticalGroup(
             kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGPBackground1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(timetxt)
-                .addGap(8, 8, 8)
+                .addGap(45, 45, 45)
                 .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(kGPBackground1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lbImgContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(kGPBackground1Layout.createSequentialGroup()
                         .addComponent(lbMRLogo)
                         .addGap(13, 13, 13)
                         .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbRoomNumberM)
-                            .addComponent(tfRoomNumberM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbPicture))
+                            .addComponent(tfRoomNumberM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(kGPBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbRoomTypeM)
@@ -660,7 +656,12 @@ public class home extends javax.swing.JFrame {
                             .addComponent(kbtnAddRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(kbtnDeleteRoom, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
                             .addComponent(kbtnUpdateRoom, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                            .addComponent(kbtnFindRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(kbtnFindRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(kGPBackground1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lbPicture)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbImgContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1299,7 +1300,7 @@ public class home extends javax.swing.JFrame {
 
         String Query = "INSERT INTO room VALUES('" + roomNo + "', '" + roomType + "', '" + bed + "', '" + price + "', 'Not Booked')";
         InsertUpdateDelete.setData(Query, "Successfully Updated");
-        
+
         // Kiểm tra các giá trị trống hoặc null
         if (roomNo.isEmpty() || roomType == null || bed == null || price.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all the fields.", "Incomplete Information", JOptionPane.ERROR_MESSAGE);
@@ -1693,16 +1694,15 @@ public class home extends javax.swing.JFrame {
         // Thực hiện truy vấn cơ sở dữ liệu để lấy lại dữ liệu mới cho bảng
         ResultSet rs = Select.getData("select * from room");
         try {
-        while (rs.next()) {
-            // Thêm dữ liệu vào table model mà không liên quan tới hình ảnh
-            model.addRow(new Object[]{
-                rs.getString(1),  // roomNo
-                rs.getString(2),  // roomType
-                rs.getString(3),  // bed
-                rs.getInt(4),     // price
-                rs.getString(5),
-            });
-        }
+            while (rs.next()) {
+                // Thêm dữ liệu vào table model mà không liên quan tới hình ảnh
+                model.addRow(new Object[]{
+                    rs.getString(1), // roomNo
+                    rs.getString(2), // roomType
+                    rs.getString(3), // bed
+                    rs.getInt(4), // price
+                    rs.getString(5),});
+            }
             rs.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -1769,20 +1769,20 @@ public class home extends javax.swing.JFrame {
             String query = "SELECT * FROM room WHERE RoomNo='" + roomNo + "'";
             ResultSet rs = Select.getData(query);
             try {
-            if (rs.next()) {
-                // Hiển thị thông tin chi tiết của phòng
-                cbRoomTypeM.setSelectedItem(rs.getString("roomType")); // Room Type
-                cbBedM.setSelectedItem(rs.getString("bed")); // Bed
-                tfPriceM.setText(rs.getString("price")); // Price
-                
-                // Thêm hàng tìm thấy vào bảng
-                model.addRow(new Object[]{
-                    rs.getString("roomNo"), 
-                    rs.getString("roomType"), 
-                    rs.getString("bed"), 
-                    rs.getInt("price"), 
-                    rs.getString("status")
-                });
+                if (rs.next()) {
+                    // Hiển thị thông tin chi tiết của phòng
+                    cbRoomTypeM.setSelectedItem(rs.getString("roomType")); // Room Type
+                    cbBedM.setSelectedItem(rs.getString("bed")); // Bed
+                    tfPriceM.setText(rs.getString("price")); // Price
+
+                    // Thêm hàng tìm thấy vào bảng
+                    model.addRow(new Object[]{
+                        rs.getString("roomNo"),
+                        rs.getString("roomType"),
+                        rs.getString("bed"),
+                        rs.getInt("price"),
+                        rs.getString("status")
+                    });
                 } else {
                     JOptionPane.showMessageDialog(this, "Room not found.", "Not Found", JOptionPane.WARNING_MESSAGE);
                 }
@@ -1794,7 +1794,7 @@ public class home extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter room number to find.", "Empty Field", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_kbtnFindRoomActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -1935,6 +1935,5 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JTextField tfRoomNumberM;
     private javax.swing.JTextField tfSearchCheckOUTDateCDB;
     private javax.swing.JTextField tfTotalAmountCCO;
-    private javax.swing.JLabel timetxt;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,37 +17,52 @@ import java.awt.event.*;
 public class ChatServer extends JFrame {
     private JTextArea chatArea;
     private JTextField inputField;
+    private JButton sendButton;
+    private JLabel nameLabel;
     private PrintWriter out;
-
+    private String userName;
     public ChatServer() {
         // Thiết lập giao diện
-        setTitle("Chat Server");
+    	setTitle("Chat Client");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        chatArea = new JTextArea();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+       
+        nameLabel = new JLabel();
+        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(nameLabel, BorderLayout.NORTH);
+        
+        chatArea = new JTextArea(20, 50);
         chatArea.setEditable(false);
-        add(new JScrollPane(chatArea), BorderLayout.CENTER);
-
-        inputField = new JTextField();
-        inputField.setEditable(false);
-        add(inputField, BorderLayout.SOUTH);
+        
+        inputField = new JTextField(30);
+        
+        sendButton = new JButton("Send");
 
         inputField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String message = inputField.getText();
-                chatArea.append("Bạn: " + message + "\n");
+                chatArea.append("You: " + message + "\n");
                 out.println(message);
                 inputField.setText("");
             }
         });
 
+        JPanel panel = new JPanel();
+        panel.add(inputField);
+        panel.add(sendButton);
+
+        add(new JScrollPane(chatArea), BorderLayout.CENTER);
+        add(panel, BorderLayout.SOUTH);
+
         setVisible(true);
 
         // Thiết lập kết nối
+        
         new Thread(new Runnable() {
             public void run() {
-                try (ServerSocket serverSocket = new ServerSocket(12345)) {
+                try (
+                	ServerSocket serverSocket = new ServerSocket(12345)) {
                     chatArea.append("Server đang lắng nghe tại cổng 12345...\n");
                     Socket clientSocket = serverSocket.accept();
                     chatArea.append("Đã kết nối với " + clientSocket.getInetAddress() + "\n");
@@ -55,10 +70,11 @@ public class ChatServer extends JFrame {
                     BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                     out = new PrintWriter(clientSocket.getOutputStream(), true);
                     inputField.setEditable(true);
-
+                    userName = in.readLine();
+                    System.out.println(userName + " has joined the chat.");
                     String clientMessage;
                     while ((clientMessage = in.readLine()) != null) {
-                        chatArea.append("Máy khách: " + clientMessage + "\n");
+                        chatArea.append(userName+":" + clientMessage + "\n");
                     }
                 } catch (IOException e) {
                     chatArea.append("Lỗi: " + e.getMessage() + "\n");

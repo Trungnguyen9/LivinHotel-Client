@@ -15,46 +15,67 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ChatClient extends JFrame {
-    private JTextArea chatArea;
+	private JTextArea chatArea;
     private JTextField inputField;
+    private JButton sendButton;
+    private JLabel nameLabel;
     private PrintWriter out;
+    private String userName; // Thêm biến userName để lưu tên người dùng
 
     public ChatClient(String serverAddress) {
         // Thiết lập giao diện
-        setTitle("Chat Client");
+    	setTitle("Chat Client");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        chatArea = new JTextArea();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+       
+        nameLabel = new JLabel();
+        nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(nameLabel, BorderLayout.NORTH);
+        
+        chatArea = new JTextArea(20, 50);
         chatArea.setEditable(false);
-        add(new JScrollPane(chatArea), BorderLayout.CENTER);
+        
+        inputField = new JTextField(30);
+        
+        sendButton = new JButton("Send");
 
-        inputField = new JTextField();
-        add(inputField, BorderLayout.SOUTH);
 
         inputField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String message = inputField.getText();
-                chatArea.append("Bạn: " + message + "\n");
+                chatArea.append("You : " + message + "\n"); // Thêm userName vào tin nhắn
                 out.println(message);
                 inputField.setText("");
             }
         });
+        JPanel panel = new JPanel();
+        panel.add(inputField);
+        panel.add(sendButton);
+
+        add(new JScrollPane(chatArea), BorderLayout.CENTER);
+        add(panel, BorderLayout.SOUTH);
 
         setVisible(true);
+        
+
+        // Nhập tên người dùng
+        userName = JOptionPane.showInputDialog(this, "Nhập tên của bạn:");
 
         // Thiết lập kết nối
         new Thread(new Runnable() {
             public void run() {
-                try (Socket socket = new Socket(serverAddress, 12345)) {
+                try {
+                	Socket socket = new Socket(serverAddress, 12345);
+                	out = new PrintWriter(socket.getOutputStream(), true);
+                	out.println(userName);
                     chatArea.append("Đã kết nối tới " + serverAddress + " tại cổng 12345\n");
-
                     BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    out = new PrintWriter(socket.getOutputStream(), true);
+                   
 
                     String serverMessage;
                     while ((serverMessage = in.readLine()) != null) {
-                        chatArea.append("Máy chủ: " + serverMessage + "\n");
+                        chatArea.append("Admin: " + serverMessage + "\n");
                     }
                 } catch (IOException e) {
                     chatArea.append("Lỗi: " + e.getMessage() + "\n");

@@ -4,6 +4,15 @@
  */
 package contact;
 
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JLabel;
+import javax.swing.Timer;
+
 /**
  *
  * @author ASUS
@@ -14,6 +23,7 @@ public class ChatContainer extends javax.swing.JFrame {
      * Creates new form ChatContainer
      */
     public ChatContainer() {
+        init();
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -31,6 +41,7 @@ public class ChatContainer extends javax.swing.JFrame {
         kbtnAdmin = new com.k33ptoo.components.KButton();
         kbtnReceptionist = new com.k33ptoo.components.KButton();
         lbChatCon = new javax.swing.JLabel();
+        timetxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,22 +78,28 @@ public class ChatContainer extends javax.swing.JFrame {
         kGPChatContainerLayout.setHorizontalGroup(
             kGPChatContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kGPChatContainerLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(44, 44, 44)
                 .addComponent(kbtnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(kbtnReceptionist, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
             .addGroup(kGPChatContainerLayout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addGap(137, 137, 137)
                 .addComponent(lbChatCon)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGPChatContainerLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(timetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95))
         );
         kGPChatContainerLayout.setVerticalGroup(
             kGPChatContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGPChatContainerLayout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
+                .addComponent(timetxt)
+                .addGap(40, 40, 40)
                 .addComponent(lbChatCon)
-                .addGap(75, 75, 75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addGroup(kGPChatContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(kbtnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kbtnReceptionist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -112,8 +129,32 @@ public class ChatContainer extends javax.swing.JFrame {
     private void kbtnReceptionistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnReceptionistActionPerformed
         // TODO add your handling code here:
         new ChatClient("").setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_kbtnReceptionistActionPerformed
 
+    private void setTime() {
+
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, dd/MM/yyyy HH:mm:ss");
+        String timeString = dateFormat.format(date);
+        timetxt.setText(timeString);
+    }
+
+    private void init() {
+        timetxt = new JLabel();
+
+        getContentPane().setLayout(new FlowLayout());
+        getContentPane().add(timetxt);
+
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setTime();
+            }
+        });
+        timer.start();
+    }
     /**
      * @param args the command line arguments
      */
@@ -154,5 +195,6 @@ public class ChatContainer extends javax.swing.JFrame {
     private com.k33ptoo.components.KButton kbtnAdmin;
     private com.k33ptoo.components.KButton kbtnReceptionist;
     private javax.swing.JLabel lbChatCon;
+    private javax.swing.JLabel timetxt;
     // End of variables declaration//GEN-END:variables
 }
