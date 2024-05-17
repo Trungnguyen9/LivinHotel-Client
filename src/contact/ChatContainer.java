@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
@@ -128,8 +129,15 @@ public class ChatContainer extends javax.swing.JFrame {
 
     private void kbtnReceptionistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnReceptionistActionPerformed
         // TODO add your handling code here:
-        new ChatClient("").setVisible(true);
-        setVisible(false);
+        SwingUtilities.invokeLater(new Runnable() {
+        @Override
+        public void run() {
+            String IP = "192.168.1.4";  // Địa chỉ IP của ChatClient
+            ChatClient chatClient = new ChatClient(IP);
+            chatClient.setVisible(true);
+        }
+    });
+    setVisible(false);
     }//GEN-LAST:event_kbtnReceptionistActionPerformed
 
     private void setTime() {

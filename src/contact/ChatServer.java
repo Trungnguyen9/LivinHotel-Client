@@ -23,7 +23,7 @@ public class ChatServer extends JFrame {
     private String userName;
     public ChatServer() {
         // Thiết lập giao diện
-    	setTitle("Chat Client");
+    	setTitle("Chat Server");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -87,3 +87,4 @@ public class ChatServer extends JFrame {
         new ChatServer();
     }
 }
+                

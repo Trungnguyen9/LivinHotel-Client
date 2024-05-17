@@ -1298,9 +1298,6 @@ public class home extends javax.swing.JFrame {
         String bed = (String) cbBedM.getSelectedItem();
         String price = tfPriceM.getText();
 
-        String Query = "INSERT INTO room VALUES('" + roomNo + "', '" + roomType + "', '" + bed + "', '" + price + "', 'Not Booked')";
-        InsertUpdateDelete.setData(Query, "Successfully Updated");
-
         // Kiểm tra các giá trị trống hoặc null
         if (roomNo.isEmpty() || roomType == null || bed == null || price.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all the fields.", "Incomplete Information", JOptionPane.ERROR_MESSAGE);
@@ -1315,6 +1312,10 @@ public class home extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter a valid integer for price.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
             return; // Dừng lại nếu giá trị không hợp lệ
         }
+
+        // Nếu tất cả các giá trị đều hợp lệ, thực hiện truy vấn SQL
+        String Query = "INSERT INTO room VALUES('" + roomNo + "', '" + roomType + "', '" + bed + "', '" + priceText + "', 'Not Booked')";
+        InsertUpdateDelete.setData(Query, "Successfully Updated");
 
         // Làm mới dữ liệu trên bảng sau khi thêm phòng thành công
         refreshRoomTable();
@@ -1349,7 +1350,7 @@ public class home extends javax.swing.JFrame {
         tfEmailCCI.setText("");
         tfIDProofCCI.setText("");
         tfAddressCCI.setText("");
-        tfCheckINDateCCI.setText("");
+//        tfCheckINDateCCI.setText("");
         cbBedCCI.setSelectedIndex(0);
         cbRoomTypeCCI.setSelectedIndex(0);
         cbRoomNumCCI.setSelectedIndex(0);
@@ -1522,6 +1523,13 @@ public class home extends javax.swing.JFrame {
         String numberOfDaysStay = tfNumDaysStayCCO.getText();
         String totalAmount = tfTotalAmountCCO.getText();
         roomNo = tfRoomNumCCO.getText();
+
+        // Kiểm tra các giá trị trống hoặc null
+        if (name.isEmpty() || mobileNumber.isEmpty() || email.isEmpty() || checkOut.isEmpty()
+                || numberOfDaysStay.isEmpty() || totalAmount.isEmpty() || roomNo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter the room number to Check out", "Incomplete Information", JOptionPane.ERROR_MESSAGE);
+            return; // Dừng lại nếu có trường trống
+        }
         Query = "update customer set numberOfDaysStay = '" + numberOfDaysStay + "', totalAmount = '" + totalAmount + "', checkOut = '" + checkOut + "' where id = '" + id + "'";
         InsertUpdateDelete.setData(Query, "");
         Query = "update room set Status = 'Not Booked' where roomNo = '" + roomNo + "'";
@@ -1794,7 +1802,7 @@ public class home extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please enter room number to find.", "Empty Field", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_kbtnFindRoomActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */

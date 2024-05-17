@@ -615,7 +615,7 @@ public class login extends javax.swing.JFrame {
             
             // Tạo hoặc cập nhật tệp XML
         try {
-            File xmlFile = new File("C:\\Users\\ASUS\\Downloads\\XML\\usershotel.xml");
+            File xmlFile = new File("C:\\Users\\ASUS\\Documents\\NetBeansProjects\\DACS1\\src\\XML\\usershotel.xml");
             Document document;
 
             if (xmlFile.exists()) {
