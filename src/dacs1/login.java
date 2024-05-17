@@ -14,6 +14,10 @@ import project.*;
 import project.InsertUpdateDelete;
 
 import java.io.File;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -23,6 +27,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 
 /**
@@ -78,6 +83,7 @@ public class login extends javax.swing.JFrame {
         btnSignupS = new javax.swing.JButton();
         btnLoginS = new javax.swing.JButton();
         btnForgotPasswordS = new javax.swing.JButton();
+        btnXML = new javax.swing.JButton();
         jpnForgotPasswordForm = new javax.swing.JPanel();
         kGPForgotPass = new com.k33ptoo.components.KGradientPanel();
         lbForgotPassTitle = new javax.swing.JLabel();
@@ -293,6 +299,14 @@ public class login extends javax.swing.JFrame {
             }
         });
 
+        btnXML.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnXML.setText("Click to view XML file");
+        btnXML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXMLActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout kGPSignupLayout = new javax.swing.GroupLayout(kGPSignup);
         kGPSignup.setLayout(kGPSignupLayout);
         kGPSignupLayout.setHorizontalGroup(
@@ -315,16 +329,17 @@ public class login extends javax.swing.JFrame {
                         .addGroup(kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(kGPSignupLayout.createSequentialGroup()
                                 .addComponent(btnSignupS)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnLoginS)
-                                .addGap(31, 31, 31)
-                                .addComponent(btnForgotPasswordS))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnForgotPasswordS, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tfAnswerS)
                             .addComponent(jcbSecurityQuesS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(tfEmailS, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfNameS, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfAddressS)
-                            .addComponent(pwfPassS, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(pwfPassS, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnXML, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(443, Short.MAX_VALUE))
         );
         kGPSignupLayout.setVerticalGroup(
@@ -361,7 +376,9 @@ public class login extends javax.swing.JFrame {
                     .addComponent(btnSignupS)
                     .addComponent(btnLoginS)
                     .addComponent(btnForgotPasswordS))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnXML)
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpnSignupFormLayout = new javax.swing.GroupLayout(jpnSignupForm);
@@ -807,6 +824,57 @@ public class login extends javax.swing.JFrame {
         new ChatContainer().setVisible(true);
     }//GEN-LAST:event_kbtnContactActionPerformed
 
+    private void btnXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXMLActionPerformed
+        // TODO add your handling code here:
+        try {
+        File xmlFile = new File("C:\\Users\\ASUS\\Documents\\NetBeansProjects\\DACS1\\src\\XML\\usershotel.xml");
+        if (!xmlFile.exists()) {
+            JOptionPane.showMessageDialog(this, "XML file not found.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+        Document document = docBuilder.parse(xmlFile);
+
+        // Tìm phần tử gốc <users>
+        Element usersElement = (Element) document.getElementsByTagName("users").item(0);
+        NodeList userList = usersElement.getElementsByTagName("user");
+
+        // Tạo cột cho bảng
+        String[] columnNames = {"Name", "Email", "Password", "Security Question", "Answer", "Address"};
+        Object[][] data = new Object[userList.getLength()][6];
+
+        // Lặp qua các phần tử <user> và thêm dữ liệu vào mảng data
+        for (int i = 0; i < userList.getLength(); i++) {
+            Element userElement = (Element) userList.item(i);
+            data[i][0] = userElement.getElementsByTagName("name").item(0).getTextContent();
+            data[i][1] = userElement.getElementsByTagName("email").item(0).getTextContent();
+            data[i][2] = userElement.getElementsByTagName("password").item(0).getTextContent();
+            data[i][3] = userElement.getElementsByTagName("securityQuestion").item(0).getTextContent();
+            data[i][4] = userElement.getElementsByTagName("answer").item(0).getTextContent();
+            data[i][5] = userElement.getElementsByTagName("address").item(0).getTextContent();
+        }
+
+        // Tạo mô hình bảng với dữ liệu
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+        JTable table = new JTable(tableModel);
+
+        // Hiển thị bảng trong một JScrollPane
+        JScrollPane scrollPane = new JScrollPane(table);
+        JFrame tableFrame = new JFrame("User Data");
+        tableFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        tableFrame.add(scrollPane);
+        tableFrame.pack();
+        tableFrame.setLocationRelativeTo(null);
+        tableFrame.setVisible(true);
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error reading XML file.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }//GEN-LAST:event_btnXMLActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -853,6 +921,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JButton btnSignupF;
     private javax.swing.JButton btnSignupL;
     private javax.swing.JButton btnSignupS;
+    private javax.swing.JButton btnXML;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox<String> jcbSecurityQuesS;
     private javax.swing.JPanel jpnContainer;

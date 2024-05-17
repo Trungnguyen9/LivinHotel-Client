@@ -83,10 +83,10 @@ public class ChatClient extends JFrame {
             }
         }).start();
     }
-
-    public static void main(String[] args) {
-        String serverAddress = JOptionPane.showInputDialog(
-                "Nhập địa chỉ IP của máy chủ:");
-        new ChatClient(serverAddress);
-    }
 }
+//    public static void main(String[] args) {
+//        String serverAddress = JOptionPane.showInputDialog(
+//                "Nhập địa chỉ IP của máy chủ:");
+//        new ChatClient(serverAddress);
+//    }
+//}

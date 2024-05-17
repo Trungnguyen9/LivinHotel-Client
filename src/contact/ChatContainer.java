@@ -132,7 +132,7 @@ public class ChatContainer extends javax.swing.JFrame {
         SwingUtilities.invokeLater(new Runnable() {
         @Override
         public void run() {
-            String IP = "192.168.1.4";  // Địa chỉ IP của ChatClient
+            String IP = "192.168.1.9";  // Địa chỉ IP của ChatClient
             ChatClient chatClient = new ChatClient(IP);
             chatClient.setVisible(true);
         }
