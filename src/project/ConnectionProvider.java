@@ -5,22 +5,30 @@
 package project;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
- *
- * @author ASUS
+ * Cung cấp kết nối đến cơ sở dữ liệu MySQL.
  */
 public class ConnectionProvider {
-    public static Connection getCon()
-    {
-        try
-        {
+    private static final String URL = "jdbc:mysql://192.168.1.133:3306/hotel";  // Địa chỉ IP máy chủ
+    private static final String USER = "remote_user";
+    private static final String PASSWORD = "password";
+
+    public static Connection getCon() {
+        try {
+            // Load MySQL JDBC Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel", "root", "tungitvku2023");
-            return con;
-        }
-        catch(Exception e)
-        {
+
+            // Establish the connection and return it
+            return DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (ClassNotFoundException e) {
+            System.out.println("MySQL JDBC Driver not found.");
+            e.printStackTrace();
+            return null;
+        } catch (SQLException e) {
+            System.out.println("Connection failed.");
+            e.printStackTrace();
             return null;
         }
     }

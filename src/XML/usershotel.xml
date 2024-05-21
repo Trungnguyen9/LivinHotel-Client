@@ -1,28 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <users>
-        
     <user>
-                
-        <name>nhan</name>
-                
-        <email>nhan@gmail.com</email>
-                
-        <password>123</password>
-                
-        <securityQuestion>What is the name of your first pet?</securityQuestion>
-                
-        <answer>nhan</answer>
-                
-        <address>Quang Binh</address>
-            
-    </user>
-    
-    <user>
-        <name>Nguyen Thanh Tung</name>
-        <email>tung@gmail.com</email>
-        <password>1234</password>
-        <securityQuestion>What is the name of the town where you were born?</securityQuestion>
-        <answer>Phu Yen</answer>
-        <address>Da Nang</address>
+        <roomNumber>201</roomNumber>
+        <customerName>Huy</customerName>
+        <checkInDate>2024/05/21</checkInDate>
+        <checkOutDate>2024/05/21</checkOutDate>
+        <customerMobileNumber>0123</customerMobileNumber>
+        <pricePerDay>700</pricePerDay>
+        <numberOfDaysStay>1</numberOfDaysStay>
+        <totalAmount>700.0</totalAmount>
+        <email>huy@gmail.com</email>
     </user>
 </users>

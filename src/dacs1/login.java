@@ -5,7 +5,10 @@
 package dacs1;
 
 import contact.ChatContainer;
+import static dacs1.EncryptByMD5.encryptMD5;
 import java.awt.CardLayout;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import project.Select;
@@ -14,6 +17,8 @@ import project.*;
 import project.InsertUpdateDelete;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.Socket;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,7 +33,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
 
 /**
  *
@@ -83,7 +87,6 @@ public class login extends javax.swing.JFrame {
         btnSignupS = new javax.swing.JButton();
         btnLoginS = new javax.swing.JButton();
         btnForgotPasswordS = new javax.swing.JButton();
-        btnXML = new javax.swing.JButton();
         jpnForgotPasswordForm = new javax.swing.JPanel();
         kGPForgotPass = new com.k33ptoo.components.KGradientPanel();
         lbForgotPassTitle = new javax.swing.JLabel();
@@ -299,14 +302,6 @@ public class login extends javax.swing.JFrame {
             }
         });
 
-        btnXML.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnXML.setText("Click to view XML file");
-        btnXML.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXMLActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout kGPSignupLayout = new javax.swing.GroupLayout(kGPSignup);
         kGPSignup.setLayout(kGPSignupLayout);
         kGPSignupLayout.setHorizontalGroup(
@@ -338,9 +333,8 @@ public class login extends javax.swing.JFrame {
                             .addComponent(tfEmailS, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfNameS, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tfAddressS)
-                            .addComponent(pwfPassS, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnXML, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(443, Short.MAX_VALUE))
+                            .addComponent(pwfPassS, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(439, Short.MAX_VALUE))
         );
         kGPSignupLayout.setVerticalGroup(
             kGPSignupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,9 +370,7 @@ public class login extends javax.swing.JFrame {
                     .addComponent(btnSignupS)
                     .addComponent(btnLoginS)
                     .addComponent(btnForgotPasswordS))
-                .addGap(18, 18, 18)
-                .addComponent(btnXML)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpnSignupFormLayout = new javax.swing.GroupLayout(jpnSignupForm);
@@ -477,7 +469,7 @@ public class login extends javax.swing.JFrame {
             .addGroup(kGPForgotPassLayout.createSequentialGroup()
                 .addGap(573, 573, 573)
                 .addComponent(lbForgotPassTitle)
-                .addContainerGap(581, Short.MAX_VALUE))
+                .addContainerGap(582, Short.MAX_VALUE))
             .addGroup(kGPForgotPassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(kGPForgotPassLayout.createSequentialGroup()
                     .addGap(383, 383, 383)
@@ -574,6 +566,8 @@ public class login extends javax.swing.JFrame {
         int check = 0;
         String email = tfEmailL.getText();
         String password = pwfPassL.getText();
+        String sctPasss = encryptMD5(password);
+
         if (email.equals("") || password.equals("")) {
             check = 1;
             JOptionPane.showMessageDialog(null, "Every Field Is Required");
@@ -582,7 +576,7 @@ public class login extends javax.swing.JFrame {
             setVisible(false);
             new adminHome().setVisible(true);
         } else {
-            ResultSet rs = Select.getData("select * from users where email = '" + email + "' and password = '" + password + "'");
+            ResultSet rs = Select.getData("select * from users where email = '" + email + "' and password = '" + sctPasss + "'");
             try {
                 if (rs.next()) {
                     check = 1;
@@ -597,8 +591,11 @@ public class login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e);
             }
         }
-        if (check == 0)
+        if (check == 0) {
             JOptionPane.showMessageDialog(null, "Incorrect Email or Password");
+        }
+
+
     }//GEN-LAST:event_btnLoginLActionPerformed
 
     private void btnSignupLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupLActionPerformed
@@ -620,6 +617,8 @@ public class login extends javax.swing.JFrame {
         String name = tfNameS.getText();
         String email = tfEmailS.getText();
         String password = pwfPassS.getText();
+        String sctPass = encryptMD5(password);
+
         String securityQuestion = (String) jcbSecurityQuesS.getSelectedItem();
         String answer = tfAnswerS.getText();
         String address = tfAddressS.getText();
@@ -627,104 +626,9 @@ public class login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Every Field Is Required");
         else {
             String Query;
-            Query = "insert into users values('" + name + "','" + email + "','" + password + "','" + securityQuestion + "', '" + answer + "', '" + address + "','false')";
+            Query = "insert into users values('" + name + "','" + email + "','" + sctPass + "','" + securityQuestion + "', '" + answer + "', '" + address + "','false')";
             InsertUpdateDelete.setData(Query, "Registered Successfully");
-            
-            // Tạo hoặc cập nhật tệp XML
-        try {
-            File xmlFile = new File("C:\\Users\\ASUS\\Documents\\NetBeansProjects\\DACS1\\src\\XML\\usershotel.xml");
-            Document document;
-
-            if (xmlFile.exists()) {
-                // Nếu tệp đã tồn tại, load tài liệu XML từ tệp đó
-                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-                document = docBuilder.parse(xmlFile);
-
-                // Tìm phần tử gốc <users>
-                Element usersElement = (Element) document.getElementsByTagName("users").item(0);
-
-                // Tạo các phần tử con và gắn chúng vào phần tử gốc
-                Element userElement = document.createElement("user");
-                usersElement.appendChild(userElement);
-
-                Element nameElement = document.createElement("name");
-                nameElement.appendChild(document.createTextNode(name));
-                userElement.appendChild(nameElement);
-
-                Element emailElement = document.createElement("email");
-                emailElement.appendChild(document.createTextNode(email));
-                userElement.appendChild(emailElement);
-
-                Element passwordElement = document.createElement("password");
-                passwordElement.appendChild(document.createTextNode(password));
-                userElement.appendChild(passwordElement);
-
-                Element securityQuestionElement = document.createElement("securityQuestion");
-                securityQuestionElement.appendChild(document.createTextNode(securityQuestion));
-                userElement.appendChild(securityQuestionElement);
-
-                Element answerElement = document.createElement("answer");
-                answerElement.appendChild(document.createTextNode(answer));
-                userElement.appendChild(answerElement);
-
-                Element addressElement = document.createElement("address");
-                addressElement.appendChild(document.createTextNode(address));
-                userElement.appendChild(addressElement);
-
-            } else {
-                // Nếu tệp chưa tồn tại, tạo một tài liệu XML mới và thêm dữ liệu vào đó
-                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-                document = docBuilder.newDocument();
-
-                // Tạo phần tử gốc <users>
-                Element usersElement = document.createElement("users");
-                document.appendChild(usersElement);
-
-                // Tạo các phần tử con và gắn chúng vào phần tử gốc
-                Element userElement = document.createElement("user");
-                usersElement.appendChild(userElement);
-
-                Element nameElement = document.createElement("name");
-                nameElement.appendChild(document.createTextNode(name));
-                userElement.appendChild(nameElement);
-
-                Element emailElement = document.createElement("email");
-                emailElement.appendChild(document.createTextNode(email));
-                userElement.appendChild(emailElement);
-
-                Element passwordElement = document.createElement("password");
-                passwordElement.appendChild(document.createTextNode(password));
-                userElement.appendChild(passwordElement);
-
-                Element securityQuestionElement = document.createElement("securityQuestion");
-                securityQuestionElement.appendChild(document.createTextNode(securityQuestion));
-                userElement.appendChild(securityQuestionElement);
-
-                Element answerElement = document.createElement("answer");
-                answerElement.appendChild(document.createTextNode(answer));
-                userElement.appendChild(answerElement);
-
-                Element addressElement = document.createElement("address");
-                addressElement.appendChild(document.createTextNode(address));
-                userElement.appendChild(addressElement);
-            }
-
-            // Tạo một đối tượng Transformer để ghi tài liệu XML đã cập nhật hoặc mới vào tệp
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-
-            // Ghi tài liệu XML vào tệp
-            DOMSource source = new DOMSource(document);
-            StreamResult result = new StreamResult(xmlFile);
-            transformer.transform(source, result);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
+        
 //            CardLayout cardLayout = (CardLayout) jpnContainer.getLayout();
 //            cardLayout.show(jpnContainer, "jpnLoginForm"); 
             jpnSignupForm.setVisible(true);
@@ -824,57 +728,6 @@ public class login extends javax.swing.JFrame {
         new ChatContainer().setVisible(true);
     }//GEN-LAST:event_kbtnContactActionPerformed
 
-    private void btnXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXMLActionPerformed
-        // TODO add your handling code here:
-        try {
-        File xmlFile = new File("C:\\Users\\ASUS\\Documents\\NetBeansProjects\\DACS1\\src\\XML\\usershotel.xml");
-        if (!xmlFile.exists()) {
-            JOptionPane.showMessageDialog(this, "XML file not found.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document document = docBuilder.parse(xmlFile);
-
-        // Tìm phần tử gốc <users>
-        Element usersElement = (Element) document.getElementsByTagName("users").item(0);
-        NodeList userList = usersElement.getElementsByTagName("user");
-
-        // Tạo cột cho bảng
-        String[] columnNames = {"Name", "Email", "Password", "Security Question", "Answer", "Address"};
-        Object[][] data = new Object[userList.getLength()][6];
-
-        // Lặp qua các phần tử <user> và thêm dữ liệu vào mảng data
-        for (int i = 0; i < userList.getLength(); i++) {
-            Element userElement = (Element) userList.item(i);
-            data[i][0] = userElement.getElementsByTagName("name").item(0).getTextContent();
-            data[i][1] = userElement.getElementsByTagName("email").item(0).getTextContent();
-            data[i][2] = userElement.getElementsByTagName("password").item(0).getTextContent();
-            data[i][3] = userElement.getElementsByTagName("securityQuestion").item(0).getTextContent();
-            data[i][4] = userElement.getElementsByTagName("answer").item(0).getTextContent();
-            data[i][5] = userElement.getElementsByTagName("address").item(0).getTextContent();
-        }
-
-        // Tạo mô hình bảng với dữ liệu
-        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
-        JTable table = new JTable(tableModel);
-
-        // Hiển thị bảng trong một JScrollPane
-        JScrollPane scrollPane = new JScrollPane(table);
-        JFrame tableFrame = new JFrame("User Data");
-        tableFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        tableFrame.add(scrollPane);
-        tableFrame.pack();
-        tableFrame.setLocationRelativeTo(null);
-        tableFrame.setVisible(true);
-
-    } catch (Exception ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error reading XML file.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-    }//GEN-LAST:event_btnXMLActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -921,7 +774,6 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JButton btnSignupF;
     private javax.swing.JButton btnSignupL;
     private javax.swing.JButton btnSignupS;
-    private javax.swing.JButton btnXML;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox<String> jcbSecurityQuesS;
     private javax.swing.JPanel jpnContainer;
