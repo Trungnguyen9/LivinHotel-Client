@@ -11,7 +11,7 @@ import java.sql.SQLException;
  * Cung cấp kết nối đến cơ sở dữ liệu MySQL.
  */
 public class ConnectionProvider {
-    private static final String URL = "jdbc:mysql://192.168.1.133:3306/hotel";  // Địa chỉ IP máy chủ
+    private static final String URL = "jdbc:mysql://192.168.1.15:3306/hotel";  // Địa chỉ IP máy chủ
     private static final String USER = "remote_user";
     private static final String PASSWORD = "password";
 

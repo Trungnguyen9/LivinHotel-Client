@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package dacs1;
+
 import java.awt.CardLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +41,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
@@ -164,14 +166,14 @@ public class home extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbCloseMenu = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        lbManageRoom = new javax.swing.JLabel();
-        lbCustomerCheckIn = new javax.swing.JLabel();
-        lbCustomerCheckOut = new javax.swing.JLabel();
         lbCustomerDetailsBill = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         lbLogout = new javax.swing.JLabel();
-        lbHomePage = new javax.swing.JLabel();
         kGradientPanel1 = new com.k33ptoo.components.KGradientPanel();
+        lbCustomerCheckOut = new javax.swing.JLabel();
+        lbCustomerCheckIn = new javax.swing.JLabel();
+        lbManageRoom = new javax.swing.JLabel();
+        lbHomePage = new javax.swing.JLabel();
         jpnMenuBar = new javax.swing.JPanel();
         kGradientPanel3 = new com.k33ptoo.components.KGradientPanel();
         lbOpenMenu = new javax.swing.JLabel();
@@ -227,6 +229,7 @@ public class home extends javax.swing.JFrame {
         tfPriceCCI = new javax.swing.JTextField();
         kbtnAlloteRoomCCI = new com.k33ptoo.components.KButton();
         kbtnClearCCI = new com.k33ptoo.components.KButton();
+        kbtnXMLCCI = new com.k33ptoo.components.KButton();
         cardCustomerCheckOut = new javax.swing.JPanel();
         kGPBackground3 = new com.k33ptoo.components.KGradientPanel();
         lbCCOLogo = new javax.swing.JLabel();
@@ -253,7 +256,7 @@ public class home extends javax.swing.JFrame {
         kbtnClearCCO = new com.k33ptoo.components.KButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtbCustomerCheckOut = new javax.swing.JTable();
-        kbtnXMLCCO = new com.k33ptoo.components.KButton();
+        kbtnImportCCO = new com.k33ptoo.components.KButton();
         kbtnviewXMLCCO = new com.k33ptoo.components.KButton();
         cardCustomerDetailsBill = new javax.swing.JPanel();
         kGPBackground4 = new com.k33ptoo.components.KGradientPanel();
@@ -278,7 +281,7 @@ public class home extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/avatar.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/z5490001851864_73817121c6231aa9a43ad51786b97620.jpg"))); // NOI18N
 
         lbCloseMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/close.png"))); // NOI18N
         lbCloseMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -287,71 +290,36 @@ public class home extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Algerian", 1, 18)); // NOI18N
         jLabel3.setText("Livin Hotel");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(lbCloseMenu)
+                .addGap(19, 19, 19))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(33, 33, 33)
-                        .addComponent(lbCloseMenu)
-                        .addGap(19, 19, 19))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(49, 49, 49))))
+                .addComponent(jLabel1)
+                .addGap(0, 4, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(lbCloseMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(lbCloseMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jpnSlideMenu.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 200));
-
-        lbManageRoom.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
-        lbManageRoom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/manage room.png"))); // NOI18N
-        lbManageRoom.setText("Manage Room");
-        lbManageRoom.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbManageRoomMouseClicked(evt);
-            }
-        });
-        jpnSlideMenu.add(lbManageRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, -1, -1));
-
-        lbCustomerCheckIn.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
-        lbCustomerCheckIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer Registration & Check IN.png"))); // NOI18N
-        lbCustomerCheckIn.setText("Customer Check In");
-        lbCustomerCheckIn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbCustomerCheckInMouseClicked(evt);
-            }
-        });
-        jpnSlideMenu.add(lbCustomerCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
-
-        lbCustomerCheckOut.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
-        lbCustomerCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer Check Out.png"))); // NOI18N
-        lbCustomerCheckOut.setText("Customer Check Out");
-        lbCustomerCheckOut.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbCustomerCheckOutMouseClicked(evt);
-            }
-        });
-        jpnSlideMenu.add(lbCustomerCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
+        jpnSlideMenu.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 240));
 
         lbCustomerDetailsBill.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
         lbCustomerDetailsBill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer Details Bill.png"))); // NOI18N
@@ -374,6 +342,37 @@ public class home extends javax.swing.JFrame {
         });
         jpnSlideMenu.add(lbLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 700, -1, -1));
 
+        kGradientPanel1.setkBorderRadius(0);
+        kGradientPanel1.setkEndColor(new java.awt.Color(102, 255, 255));
+        kGradientPanel1.setkStartColor(new java.awt.Color(102, 102, 255));
+
+        lbCustomerCheckOut.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
+        lbCustomerCheckOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer Check Out.png"))); // NOI18N
+        lbCustomerCheckOut.setText("Customer Check Out");
+        lbCustomerCheckOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCustomerCheckOutMouseClicked(evt);
+            }
+        });
+
+        lbCustomerCheckIn.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
+        lbCustomerCheckIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer Registration & Check IN.png"))); // NOI18N
+        lbCustomerCheckIn.setText("Customer Check In");
+        lbCustomerCheckIn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCustomerCheckInMouseClicked(evt);
+            }
+        });
+
+        lbManageRoom.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
+        lbManageRoom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/manage room.png"))); // NOI18N
+        lbManageRoom.setText("Manage Room");
+        lbManageRoom.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbManageRoomMouseClicked(evt);
+            }
+        });
+
         lbHomePage.setFont(new java.awt.Font("Algerian", 0, 14)); // NOI18N
         lbHomePage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Customer Check Out.png"))); // NOI18N
         lbHomePage.setText("Home");
@@ -382,21 +381,32 @@ public class home extends javax.swing.JFrame {
                 lbHomePageMouseClicked(evt);
             }
         });
-        jpnSlideMenu.add(lbHomePage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
-
-        kGradientPanel1.setkBorderRadius(0);
-        kGradientPanel1.setkEndColor(new java.awt.Color(102, 255, 255));
-        kGradientPanel1.setkStartColor(new java.awt.Color(102, 102, 255));
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbHomePage)
+                    .addComponent(lbManageRoom)
+                    .addComponent(lbCustomerCheckOut)
+                    .addComponent(lbCustomerCheckIn))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         kGradientPanel1Layout.setVerticalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
+                .addContainerGap(262, Short.MAX_VALUE)
+                .addComponent(lbHomePage)
+                .addGap(28, 28, 28)
+                .addComponent(lbManageRoom)
+                .addGap(29, 29, 29)
+                .addComponent(lbCustomerCheckIn)
+                .addGap(33, 33, 33)
+                .addComponent(lbCustomerCheckOut)
+                .addGap(216, 216, 216))
         );
 
         jpnSlideMenu.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 768));
@@ -804,6 +814,17 @@ public class home extends javax.swing.JFrame {
             }
         });
 
+        kbtnXMLCCI.setText("XML");
+        kbtnXMLCCI.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnXMLCCI.setkHoverEndColor(new java.awt.Color(0, 204, 204));
+        kbtnXMLCCI.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kbtnXMLCCI.setkHoverStartColor(new java.awt.Color(153, 255, 0));
+        kbtnXMLCCI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kbtnXMLCCIActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout kGPBackground2Layout = new javax.swing.GroupLayout(kGPBackground2);
         kGPBackground2.setLayout(kGPBackground2Layout);
         kGPBackground2Layout.setHorizontalGroup(
@@ -841,9 +862,12 @@ public class home extends javax.swing.JFrame {
                         .addComponent(lbRoomTypeCCI)
                         .addComponent(lbBedCCI)
                         .addComponent(lbRoomNumCCI))
-                    .addGroup(kGPBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(kbtnClearCCI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                        .addComponent(kbtnAlloteRoomCCI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(kGPBackground2Layout.createSequentialGroup()
+                        .addGroup(kGPBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(kbtnClearCCI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(kbtnAlloteRoomCCI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(kbtnXMLCCI, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))
                 .addGap(30, 30, 30))
         );
         kGPBackground2Layout.setVerticalGroup(
@@ -896,7 +920,9 @@ public class home extends javax.swing.JFrame {
                         .addComponent(lbEmailCCI)
                         .addGap(18, 18, 18)
                         .addComponent(tfEmailCCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(kbtnAlloteRoomCCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(kGPBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(kbtnAlloteRoomCCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(kbtnXMLCCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(15, 15, 15)
                 .addComponent(kbtnClearCCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(122, Short.MAX_VALUE))
@@ -1023,14 +1049,14 @@ public class home extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jtbCustomerCheckOut);
 
-        kbtnXMLCCO.setText("XML");
-        kbtnXMLCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        kbtnXMLCCO.setkHoverEndColor(new java.awt.Color(0, 204, 204));
-        kbtnXMLCCO.setkHoverForeGround(new java.awt.Color(255, 255, 255));
-        kbtnXMLCCO.setkHoverStartColor(new java.awt.Color(153, 255, 0));
-        kbtnXMLCCO.addActionListener(new java.awt.event.ActionListener() {
+        kbtnImportCCO.setText("Import XML");
+        kbtnImportCCO.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        kbtnImportCCO.setkHoverEndColor(new java.awt.Color(0, 204, 204));
+        kbtnImportCCO.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        kbtnImportCCO.setkHoverStartColor(new java.awt.Color(153, 255, 0));
+        kbtnImportCCO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kbtnXMLCCOActionPerformed(evt);
+                kbtnImportCCOActionPerformed(evt);
             }
         });
 
@@ -1039,11 +1065,6 @@ public class home extends javax.swing.JFrame {
         kbtnviewXMLCCO.setkHoverEndColor(new java.awt.Color(0, 204, 204));
         kbtnviewXMLCCO.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         kbtnviewXMLCCO.setkHoverStartColor(new java.awt.Color(153, 255, 0));
-        kbtnviewXMLCCO.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kbtnviewXMLCCOActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout kGPBackground3Layout = new javax.swing.GroupLayout(kGPBackground3);
         kGPBackground3.setLayout(kGPBackground3Layout);
@@ -1093,7 +1114,7 @@ public class home extends javax.swing.JFrame {
                             .addComponent(lbEmailCCO)
                             .addComponent(tfCustomerMNCCO, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGPBackground3Layout.createSequentialGroup()
-                                .addComponent(kbtnXMLCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(kbtnImportCCO, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(kbtnviewXMLCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -1136,7 +1157,7 @@ public class home extends javax.swing.JFrame {
                 .addGroup(kGPBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(kbtnCheckOutCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kbtnClearCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(kbtnXMLCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(kbtnImportCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kbtnviewXMLCCO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1385,22 +1406,30 @@ public class home extends javax.swing.JFrame {
     private void kbtnClearCCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnClearCCIActionPerformed
         // TODO add your handling code here:
         tfNameCCI.setText("");
-        tfNameCCI.setText("");
         tfMobileNumCCI.setText("");
         tfNationalityCCI.setText("");
-        cbGenderCCI.setSelectedIndex(0);
         tfEmailCCI.setText("");
         tfIDProofCCI.setText("");
         tfAddressCCI.setText("");
-//        tfCheckINDateCCI.setText("");
-        cbBedCCI.setSelectedIndex(0);
-        cbRoomTypeCCI.setSelectedIndex(0);
-        cbRoomNumCCI.setSelectedIndex(0);
+//    tfCheckINDateCCI.setText("");
         tfPriceCCI.setText("");
+
+        // Đảm bảo rằng JComboBox có mục trước khi đặt chỉ mục
+        if (cbGenderCCI.getItemCount() > 0) {
+            cbGenderCCI.setSelectedIndex(0);
+        }
+        if (cbBedCCI.getItemCount() > 0) {
+            cbBedCCI.setSelectedIndex(0);
+        }
+        if (cbRoomTypeCCI.getItemCount() > 0) {
+            cbRoomTypeCCI.setSelectedIndex(0);
+        }
+        if (cbRoomNumCCI.getItemCount() > 0) {
+            cbRoomNumCCI.setSelectedIndex(0);
+        }
 
         CardLayout cardLayout = (CardLayout) jpnMain.getLayout();
         cardLayout.show(jpnMain, "cardCustomerCheckIn");
-
     }//GEN-LAST:event_kbtnClearCCIActionPerformed
 
     private void cbBedCCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBedCCIActionPerformed
@@ -1845,7 +1874,7 @@ public class home extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_kbtnFindRoomActionPerformed
 
-    private void kbtnXMLCCOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnXMLCCOActionPerformed
+    private void kbtnXMLCCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnXMLCCIActionPerformed
         // TODO add your handling code here:
         try {
             // Đường dẫn tới tệp XML
@@ -1853,15 +1882,18 @@ public class home extends javax.swing.JFrame {
             Document document;
 
             // Lấy dữ liệu từ các JTextField
-            String roomNumber = tfRoomNumCCO.getText();
-            String customerName = tfCustomerNameCCO.getText();
-            String checkInDate = tfCheckINDateCCO.getText();
-            String checkOutDate = tfCheckOUTDateCCO.getText();
-            String customerMobileNumber = tfCustomerMNCCO.getText();
-            String pricePerDay = tfPricePerDayCCO.getText();
-            String numberOfDaysStay = tfNumDaysStayCCO.getText();
-            String totalAmount = tfTotalAmountCCO.getText();
-            String email = tfEmailCCO.getText();
+            String name = tfNameCCI.getText();
+            String mobileNumber = tfMobileNumCCI.getText();
+            String nationality = tfNationalityCCI.getText();
+            String gender = (String) cbGenderCCI.getSelectedItem();
+            String email = tfEmailCCI.getText();
+            String idProof = tfIDProofCCI.getText();
+            String address = tfAddressCCI.getText();
+            String checkIN = tfCheckINDateCCI.getText();
+            String bed = (String) cbBedCCI.getSelectedItem();
+            String roomType = (String) cbRoomTypeCCI.getSelectedItem();
+            String roomNo = (String) cbRoomNumCCI.getSelectedItem();
+            String price = tfPriceCCI.getText();
 
             if (xmlFile.exists()) {
                 // Nếu tệp đã tồn tại, load tài liệu XML từ tệp đó
@@ -1876,15 +1908,18 @@ public class home extends javax.swing.JFrame {
                 Element userElement = document.createElement("user");
                 usersElement.appendChild(userElement);
 
-                createElement(document, userElement, "roomNumber", roomNumber);
-                createElement(document, userElement, "customerName", customerName);
-                createElement(document, userElement, "checkInDate", checkInDate);
-                createElement(document, userElement, "checkOutDate", checkOutDate);
-                createElement(document, userElement, "customerMobileNumber", customerMobileNumber);
-                createElement(document, userElement, "pricePerDay", pricePerDay);
-                createElement(document, userElement, "numberOfDaysStay", numberOfDaysStay);
-                createElement(document, userElement, "totalAmount", totalAmount);
+                createElement(document, userElement, "name", name);
+                createElement(document, userElement, "mobileNumber", mobileNumber);
+                createElement(document, userElement, "nationality", nationality);
+                createElement(document, userElement, "gender", gender);
                 createElement(document, userElement, "email", email);
+                createElement(document, userElement, "idProof", idProof);
+                createElement(document, userElement, "address", address);
+                createElement(document, userElement, "checkIN", checkIN);
+                createElement(document, userElement, "bed", bed);
+                createElement(document, userElement, "roomType", roomType);
+                createElement(document, userElement, "roomNo", roomNo);
+                createElement(document, userElement, "price", price);
             } else {
                 // Nếu tệp chưa tồn tại, tạo một tài liệu XML mới và thêm dữ liệu vào đó
                 DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -1899,15 +1934,18 @@ public class home extends javax.swing.JFrame {
                 Element userElement = document.createElement("user");
                 usersElement.appendChild(userElement);
 
-                createElement(document, userElement, "roomNumber", roomNumber);
-                createElement(document, userElement, "customerName", customerName);
-                createElement(document, userElement, "checkInDate", checkInDate);
-                createElement(document, userElement, "checkOutDate", checkOutDate);
-                createElement(document, userElement, "customerMobileNumber", customerMobileNumber);
-                createElement(document, userElement, "pricePerDay", pricePerDay);
-                createElement(document, userElement, "numberOfDaysStay", numberOfDaysStay);
-                createElement(document, userElement, "totalAmount", totalAmount);
+                createElement(document, userElement, "name", name);
+                createElement(document, userElement, "mobileNumber", mobileNumber);
+                createElement(document, userElement, "nationality", nationality);
+                createElement(document, userElement, "gender", gender);
                 createElement(document, userElement, "email", email);
+                createElement(document, userElement, "idProof", idProof);
+                createElement(document, userElement, "address", address);
+                createElement(document, userElement, "checkIN", checkIN);
+                createElement(document, userElement, "bed", bed);
+                createElement(document, userElement, "roomType", roomType);
+                createElement(document, userElement, "roomNo", roomNo);
+                createElement(document, userElement, "price", price);
             }
 
             // Tạo một đối tượng Transformer để ghi tài liệu XML đã cập nhật hoặc mới vào tệp
@@ -1933,61 +1971,82 @@ public class home extends javax.swing.JFrame {
         Element element = document.createElement(tagName);
         element.appendChild(document.createTextNode(textContent));
         parent.appendChild(element);
-    }//GEN-LAST:event_kbtnXMLCCOActionPerformed
+    }//GEN-LAST:event_kbtnXMLCCIActionPerformed
 
-    private void kbtnviewXMLCCOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnviewXMLCCOActionPerformed
+    private void kbtnImportCCOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtnImportCCOActionPerformed
         // TODO add your handling code here:
-        try {
-        File xmlFile = new File("C:\\Users\\ACER\\OneDrive\\Documents\\NetBeansProjects\\LIVINHotel\\src\\XML\\usershotel.xml");
-        if (!xmlFile.exists()) {
-            JOptionPane.showMessageDialog(this, "XML file not found.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+         try {
+        // Sử dụng JFileChooser để chọn tệp XML
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn tệp XML để import");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("XML files", "xml"));
+
+        int userSelection = fileChooser.showOpenDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File xmlFile = fileChooser.getSelectedFile();
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+            Document document = docBuilder.parse(xmlFile);
+
+            // Tìm phần tử gốc <users>
+            Element usersElement = (Element) document.getElementsByTagName("users").item(0);
+            NodeList userList = usersElement.getElementsByTagName("user");
+
+            // Tạo cột cho bảng
+            String[] columnNames = {
+                "Name", "Mobile Number", "Nationality", "Gender", 
+                "Email", "ID Proof", "Address", "Check-IN", 
+                "Bed", "Room Type", "Room Number", "Price"
+            };
+            Object[][] data = new Object[userList.getLength()][12];
+
+            // Lặp qua các phần tử <user> và thêm dữ liệu vào mảng data
+            for (int i = 0; i < userList.getLength(); i++) {
+                Element userElement = (Element) userList.item(i);
+
+                data[i][0] = getElementTextContent(userElement, "name");
+                data[i][1] = getElementTextContent(userElement, "mobileNumber");
+                data[i][2] = getElementTextContent(userElement, "nationality");
+                data[i][3] = getElementTextContent(userElement, "gender");
+                data[i][4] = getElementTextContent(userElement, "email");
+                data[i][5] = getElementTextContent(userElement, "idProof");
+                data[i][6] = getElementTextContent(userElement, "address");
+                data[i][7] = getElementTextContent(userElement, "checkIN");
+                data[i][8] = getElementTextContent(userElement, "bed");
+                data[i][9] = getElementTextContent(userElement, "roomType");
+                data[i][10] = getElementTextContent(userElement, "roomNo");
+                data[i][11] = getElementTextContent(userElement, "price");
+            }
+
+            // Tạo mô hình bảng với dữ liệu
+            DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
+            jtbCustomerCheckOut.setModel(tableModel);
+
+            // Hiển thị thông báo khi nhập dữ liệu thành công
+            JOptionPane.showMessageDialog(null, "Data imported from XML successfully!");
+            } else {
+            // Người dùng đã hủy bỏ chọn tệp
+            JOptionPane.showMessageDialog(this, "Import canceled.", "Info", JOptionPane.INFORMATION_MESSAGE);
         }
-
-        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-        Document document = docBuilder.parse(xmlFile);
-
-        // Tìm phần tử gốc <users>
-        Element usersElement = (Element) document.getElementsByTagName("users").item(0);
-        NodeList userList = usersElement.getElementsByTagName("user");
-
-        // Tạo cột cho bảng
-        String[] columnNames = {"Room Number", "Customer Name", "CheckIn date", "CheckOut date", "Customer MN", "Price Per Day", "Number of days stay", "Total Amount", "Email"};
-        Object[][] data = new Object[userList.getLength()][9];
-
-        // Lặp qua các phần tử <user> và thêm dữ liệu vào mảng data
-        for (int i = 0; i < userList.getLength(); i++) {
-            Element userElement = (Element) userList.item(i);
-            data[i][0] = userElement.getElementsByTagName("roomNumber").item(0).getTextContent();
-            data[i][1] = userElement.getElementsByTagName("customerName").item(0).getTextContent();
-            data[i][2] = userElement.getElementsByTagName("checkInDate").item(0).getTextContent();
-            data[i][3] = userElement.getElementsByTagName("checkOutDate").item(0).getTextContent();
-            data[i][4] = userElement.getElementsByTagName("customerMobileNumber").item(0).getTextContent();
-            data[i][5] = userElement.getElementsByTagName("pricePerDay").item(0).getTextContent();
-            data[i][6] = userElement.getElementsByTagName("numberOfDaysStay").item(0).getTextContent();
-            data[i][7] = userElement.getElementsByTagName("totalAmount").item(0).getTextContent();
-            data[i][8] = userElement.getElementsByTagName("email").item(0).getTextContent();
-        }
-
-        // Tạo mô hình bảng với dữ liệu
-        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
-        JTable table = new JTable(tableModel);
-
-        // Hiển thị bảng trong một JScrollPane
-        JScrollPane scrollPane = new JScrollPane(table);
-        JFrame tableFrame = new JFrame("User Data");
-        tableFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        tableFrame.add(scrollPane);
-        tableFrame.pack();
-        tableFrame.setLocationRelativeTo(null);
-        tableFrame.setVisible(true);
 
     } catch (Exception ex) {
         ex.printStackTrace();
         JOptionPane.showMessageDialog(this, "Error reading XML file.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    }//GEN-LAST:event_kbtnviewXMLCCOActionPerformed
+} 
+
+private String getElementTextContent(Element parent, String tagName) {
+    NodeList nodeList = parent.getElementsByTagName(tagName);
+    if (nodeList.getLength() > 0) {
+        Node node = nodeList.item(0);
+        if (node != null) {
+            return node.getTextContent();
+        }
+    }
+    return ""; // Return an empty string if the element or its content is missing
+    }//GEN-LAST:event_kbtnImportCCOActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2064,11 +2123,12 @@ public class home extends javax.swing.JFrame {
     private com.k33ptoo.components.KButton kbtnClearCCO;
     private com.k33ptoo.components.KButton kbtnDeleteRoom;
     private com.k33ptoo.components.KButton kbtnFindRoom;
+    private com.k33ptoo.components.KButton kbtnImportCCO;
     private com.k33ptoo.components.KButton kbtnResetMR;
     private com.k33ptoo.components.KButton kbtnSearchCCO;
     private com.k33ptoo.components.KButton kbtnSearchCDB;
     private com.k33ptoo.components.KButton kbtnUpdateRoom;
-    private com.k33ptoo.components.KButton kbtnXMLCCO;
+    private com.k33ptoo.components.KButton kbtnXMLCCI;
     private com.k33ptoo.components.KButton kbtnviewXMLCCO;
     private javax.swing.JLabel lbAddressCCI;
     private javax.swing.JLabel lbBedCCI;

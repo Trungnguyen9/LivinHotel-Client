@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <users>
+        
     <user>
-        <roomNumber>201</roomNumber>
-        <customerName>Huy</customerName>
-        <checkInDate>2024/05/21</checkInDate>
-        <checkOutDate>2024/05/21</checkOutDate>
-        <customerMobileNumber>0123</customerMobileNumber>
-        <pricePerDay>700</pricePerDay>
-        <numberOfDaysStay>1</numberOfDaysStay>
-        <totalAmount>700.0</totalAmount>
-        <email>huy@gmail.com</email>
+                
+        <name>tung</name>
+                
+        <mobileNumber>123</mobileNumber>
+                
+        <nationality>VietNam</nationality>
+                
+        <gender>Male</gender>
+                
+        <email>tung@gmail.com</email>
+                
+        <idProof>ID123</idProof>
+                
+        <address>PhuYen</address>
+                
+        <checkIN>2024/05/30</checkIN>
+                
+        <bed>Double</bed>
+                
+        <roomType>AC</roomType>
+                
+        <roomNo>201</roomNo>
+                
+        <price>700</price>
+            
+    </user>
+    
+    <user>
+        <name>trung</name>
+        <mobileNumber>0123</mobileNumber>
+        <nationality>Vietnam</nationality>
+        <gender>Male</gender>
+        <email>trung123@gmail.com</email>
+        <idProof>ID0123</idProof>
+        <address>Da nang</address>
+        <checkIN>2024/05/30</checkIN>
+        <bed>Double</bed>
+        <roomType>AC</roomType>
+        <roomNo>101</roomNo>
+        <price>600</price>
     </user>
 </users>
